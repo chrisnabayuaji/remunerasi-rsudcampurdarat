@@ -127,9 +127,9 @@
       title: 'Keluar dari aplikasi ini?',
       text: 'Pastikan semua data sudah tersimpan sebelum keluar.',
       icon: 'question',
-      iconColor: '#1E88E5',
+      iconColor: '#E65100',
       showCancelButton: true,
-      confirmButtonColor: '#1E88E5',
+      confirmButtonColor: '#E65100',
       cancelButtonColor: '#90A4AE',
       confirmButtonText: '<i class="fa-solid fa-right-from-bracket me-1"></i> Ya, Keluar',
       cancelButtonText: 'Batal',
@@ -140,4 +140,45 @@
       }
     });
   }
+
+  // ── Auto-logout Idle Detection (Multi-tab support via LocalStorage)
+  (function() {
+    const IDLE_TIMEOUT = 15 * 60 * 1000; // 15 Menit (dalam milidetik)
+    const CHECK_INTERVAL = 5000; // Cek setiap 5 detik
+    const STORAGE_KEY = 'rs_remun_last_active';
+    let lastUpdateTime = 0;
+
+    // Reset status aktif
+    function resetActiveTime() {
+      const now = Date.now();
+      // Throttle penulisan ke localStorage maksimal 1 detik sekali untuk performa
+      if (now - lastUpdateTime > 1000) {
+        localStorage.setItem(STORAGE_KEY, now);
+        lastUpdateTime = now;
+      }
+    }
+
+    // Set waktu awal aktif saat halaman dimuat
+    localStorage.setItem(STORAGE_KEY, Date.now());
+
+    // Daftarkan event listener untuk mendeteksi aktivitas pengguna
+    const events = ['mousemove', 'mousedown', 'keypress', 'scroll', 'touchstart', 'click'];
+    events.forEach(event => {
+      document.addEventListener(event, resetActiveTime, { passive: true });
+    });
+
+    // Cek berkala apakah pengguna menganggur (idle)
+    setInterval(function() {
+      const lastActive = parseInt(localStorage.getItem(STORAGE_KEY) || Date.now(), 10);
+      const elapsed = Date.now() - lastActive;
+
+      if (elapsed >= IDLE_TIMEOUT) {
+        // Hapus waktu aktif agar tidak loop redirect di tab lain
+        localStorage.removeItem(STORAGE_KEY);
+        
+        // Redirect ke logout
+        window.location.href = "{{ url('/app/auth/logout_action') }}";
+      }
+    }, CHECK_INTERVAL);
+  })();
 </script>

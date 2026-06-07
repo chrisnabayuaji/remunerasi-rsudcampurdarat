@@ -38,8 +38,6 @@
     </div>
     <ul class="dropdown-menu dropdown-menu-end shadow" style="font-size:13px; border-color:var(--border); border-radius:12px;">
       <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user me-2 text-primary"></i> Profil Saya</a></li>
-      <li><a class="dropdown-item" href="#"><i class="fa-solid fa-building me-2 text-primary"></i> Profil Perusahaan</a></li>
-      <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear me-2 text-primary"></i> Pengaturan</a></li>
       <li>
         <hr class="dropdown-divider" />
       </li>
