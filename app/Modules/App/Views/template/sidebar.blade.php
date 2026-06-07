@@ -12,7 +12,7 @@
     </div>
     <div class="brand-text">
       <span class="brand-name">{{ $identitas['aplikasi_merk'] }}</span><br>
-      <span class="brand-sub">{{ $identitas['aplikasi_singkatan_nm'] }}</span>
+      <span class="brand-sub">{{ $identitas['fasyankes_nm'] }}</span>
     </div>
   </div>
 
