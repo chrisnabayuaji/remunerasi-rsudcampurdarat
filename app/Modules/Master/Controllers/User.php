@@ -157,4 +157,63 @@ class User extends BaseController
   {
     return UserModel::loadDatatables();
   }
+
+  function profile_modal()
+  {
+    $id = session('user_id');
+    $d['main'] = DbModel::getData('app_user', ['user_id' => $id]);
+    $d['form_act'] = url('master/user/save_profile?n=' . $this->nav_id);
+    return $this->renderView($this->template . 'profileModal', $d);
+  }
+
+  function save_profile()
+  {
+    $id = session('user_id');
+    $d = fsPost();
+
+    // Check Duplicate Username (user_nm)
+    $checkUser = DbModel::getData('app_user', ['user_nm' => $d['user_nm']]);
+    if ($checkUser && $checkUser['user_id'] != $id) {
+       return redirect()
+         ->back()
+         ->with('flash_error', "Username '{$d['user_nm']}' sudah digunakan oleh user lain!");
+    }
+
+    // Password Hashing
+    if (isset($d['password']) && !empty($d['password'])) {
+      if ($d['password'] !== $d['password_confirmation']) {
+        return redirect()
+          ->back()
+          ->with('flash_error', "Konfirmasi password tidak cocok!");
+      }
+      $d['user_hash'] = password_hash($d['password'], PASSWORD_DEFAULT);
+    }
+    unset($d['password'], $d['password_confirmation']);
+
+    DbModel::beginTransaction();
+    try {
+      $updateData = DbModel::updateData('app_user', $d, ['user_id' => $id]);
+      if (!$updateData) {
+        throw new \Exception("Gagal mengubah data profil", 1);
+      }
+
+      // Update session values
+      session()->put('full_nm', $d['full_nm']);
+      session()->put('user_nm', $d['user_nm']);
+
+      DbModel::commitTransaction();
+      return redirect()
+        ->back()
+        ->with('flash_success', 'Profil Anda sukses diperbarui!');
+    } catch (\Throwable $th) {
+      DbModel::rollbackTransaction();
+      Log::error($th->getMessage());
+      if (app()->environment('local')) {
+        throw $th;
+      }
+      return redirect()
+        ->back()
+        ->with('flash_error', $th->getMessage());
+    }
+  }
 }

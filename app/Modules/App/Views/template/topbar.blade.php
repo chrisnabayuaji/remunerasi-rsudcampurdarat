@@ -28,16 +28,16 @@
     </div>
     <div class="user-chip dropdown" data-bs-toggle="dropdown">
       <div class="avatar">
-        {{ strtoupper(substr(session('nama') ?? session('username') ?? 'U', 0, 2)) }}
+        {{ strtoupper(substr(session('full_nm') ?? session('user_nm') ?? 'U', 0, 2)) }}
       </div>
       <div>
-        <div class="user-name">{{ session('nama') ?? session('username') ?? 'User' }}</div>
+        <div class="user-name">{{ session('full_nm') ?? session('user_nm') ?? 'User' }}</div>
         <div class="user-role">{{ session('role_nm') ?? 'Administrator' }}</div>
       </div>
       <i class="fa-solid fa-chevron-down ms-1" style="font-size:9px; color:var(--muted)"></i>
     </div>
     <ul class="dropdown-menu dropdown-menu-end shadow" style="font-size:13px; border-color:var(--border); border-radius:12px;">
-      <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user me-2 text-primary"></i> Profil Saya</a></li>
+      <li><a class="dropdown-item" href="javascript:void(0)" onclick="fsModalShow(event, {url: '{{ url('master/user/profile_modal?n=') . $nav_id }}', title: 'Profil Saya'})"><i class="fa-solid fa-user me-2 text-primary"></i> Profil Saya</a></li>
       <li>
         <hr class="dropdown-divider" />
       </li>
