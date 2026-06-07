@@ -22,11 +22,15 @@
 
   <style>
     :root {
-      --primary: #2196F3;
-      --primary-dark: #1565C0;
+      --primary: #0D47A1;
+      --primary-dark: #0a3880;
       --primary-light: #BBDEFB;
       --primary-xlight: #E3F2FD;
-      --accent: #00BCD4;
+      --orange: #E65100;
+      --orange-dark: #BF360C;
+      --orange-light: #FFCCBC;
+      --orange-xlight: #FFF3E0;
+      --accent: #FF6D00;
       --text: #1a2744;
       --muted: #64748B;
       --border: #DBEAFE;
@@ -65,7 +69,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(13, 71, 161, 0.9) 0%, rgba(13, 71, 161, 0.4) 50%, rgba(13, 71, 161, 0.2) 100%);
+      background: linear-gradient(to top, rgba(13, 71, 161, 0.92) 0%, rgba(230, 81, 0, 0.55) 55%, rgba(13, 71, 161, 0.25) 100%);
     }
 
     .visual-content {
@@ -118,12 +122,12 @@
       width: 52px;
       height: 52px;
       border-radius: 14px;
-      background: linear-gradient(135deg, #42A5F5, #00BCD4);
+      background: linear-gradient(135deg, var(--orange), var(--primary));
       display: grid;
       place-items: center;
       font-size: 22px;
       color: #fff;
-      box-shadow: 0 8px 16px rgba(33, 150, 243, 0.2);
+      box-shadow: 0 8px 16px rgba(230, 81, 0, 0.25);
     }
 
     .brand-name {
@@ -194,13 +198,13 @@
 
     .form-control:focus {
       outline: none;
-      border-color: var(--primary);
+      border-color: var(--orange);
       background: #fff;
-      box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.15);
+      box-shadow: 0 0 0 4px rgba(230, 81, 0, 0.12);
     }
 
     .form-control:focus+i {
-      color: var(--primary);
+      color: var(--orange);
     }
 
     .invalid-feedback {
@@ -232,7 +236,7 @@
     }
 
     .password-toggle:hover {
-      color: var(--primary);
+      color: var(--orange);
     }
 
     .auth-options {
@@ -249,14 +253,14 @@
     }
 
     .form-check-input:checked {
-      background-color: var(--primary);
-      border-color: var(--primary);
-      box-shadow: 0 2px 4px rgba(33, 150, 243, .2);
+      background-color: var(--orange);
+      border-color: var(--orange);
+      box-shadow: 0 2px 4px rgba(230, 81, 0, .2);
     }
 
     .form-check-input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(33, 150, 243, .15);
+      border-color: var(--orange);
+      box-shadow: 0 0 0 4px rgba(230, 81, 0, .12);
     }
 
     .form-check-label {
@@ -268,7 +272,7 @@
     }
 
     .forgot-link {
-      color: var(--primary);
+      color: var(--orange);
       text-decoration: none;
       font-weight: 600;
     }
@@ -280,14 +284,14 @@
     .btn-login {
       width: 100%;
       height: 36px !important;
-      background: linear-gradient(135deg, #2196F3, #1565C0);
+      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
       border: none;
       border-radius: 8px;
       color: #fff;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 14px;
       letter-spacing: 0.5px;
-      box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+      box-shadow: 0 4px 12px rgba(230, 81, 0, 0.25);
       transition: all 0.3s ease;
       display: inline-flex;
       align-items: center;
@@ -299,20 +303,63 @@
 
     .btn-login:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(33, 150, 243, 0.3);
-      background: linear-gradient(135deg, #42A5F5, #1976D2);
+      box-shadow: 0 6px 16px rgba(230, 81, 0, 0.35);
+      background: linear-gradient(135deg, #FF6D00, var(--orange));
+    }
+
+    /* ── DIVIDER ── */
+    .divider-or {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .divider-or::before,
+    .divider-or::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #E2E8F0;
+    }
+
+    /* ── RSUD BADGE ── */
+    .rsud-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary-xlight), var(--orange-xlight));
+      border: 1px solid #BBDEFB;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 28px;
+    }
+    .rsud-badge-icon {
+      font-size: 20px;
+      color: var(--primary);
+    }
+    .rsud-badge-text {
+      font-size: 11.5px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .rsud-badge-text strong {
+      display: block;
+      font-size: 12.5px;
+      color: var(--primary-dark);
     }
 
     /* ── FOOTER ── */
     .auth-footer {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 32px;
       font-size: 13px;
       color: var(--muted);
     }
 
     .auth-footer a {
-      color: var(--primary);
+      color: var(--orange);
       text-decoration: none;
       font-weight: 700;
     }
@@ -349,8 +396,8 @@
     <!-- LEFT SIDE -->
     <section class="login-visual">
       <div class="visual-content">
-        <h1>Keuangan Akurat, Bisnis Melesat.</h1>
-        <p>Solusi akuntansi terpadu untuk efisiensi pelaporan, manajemen inventaris, dan analisa keuangan yang cerdas. Kendalikan masa depan bisnis Anda hari ini.</p>
+        <h1>Pelayanan Responsif<br>dengan Hati.</h1>
+        <p>Sistem Informasi Remunerasi RSUD Campurdarat dr. Karneni — transparansi, akurasi, dan keadilan dalam pengelolaan kinerja dan jasa layanan medis.</p>
       </div>
     </section>
 
@@ -360,11 +407,20 @@
         <!-- BRAND -->
         <div class="brand-logo">
           <div class="logo-icon">
-            <i class="fa-solid fa-chart-line"></i>
+            <i class="fa-solid fa-hospital"></i>
           </div>
           <div>
             <div class="brand-name">{{ $identitas['aplikasi_merk'] }}</div>
             <div class="brand-sub">{{ $identitas['aplikasi_nm'] }}</div>
+          </div>
+        </div>
+
+        <!-- RSUD BADGE -->
+        <div class="rsud-badge">
+          <div class="rsud-badge-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="rsud-badge-text">
+            <strong>RSUD Campurdarat dr. Karneni</strong>
+            Akses terbatas untuk staf & manajemen yang berwenang
           </div>
         </div>
 
