@@ -39,44 +39,51 @@
               </div>
 
               <div class="row mb-3">
-                <label for="perusahaan_nm" class="col-md-2 col-sm-4 col-form-label">Nama Perusahaan</label>
+                <label for="fasyankes_nm" class="col-md-2 col-sm-4 col-form-label required">Nama Fasyankes / RS</label>
                 <div class="col-md-6 col-sm-8">
-                  <input type="text" class="form-control" id="perusahaan_nm" name="perusahaan_nm" value="{{ $main['perusahaan_nm'] ?? '' }}" placeholder="Contoh: PT. Maju Jaya">
+                  <input type="text" class="form-control" id="fasyankes_nm" name="fasyankes_nm" value="{{ $main['fasyankes_nm'] ?? '' }}" required placeholder="Contoh: RSUD Campurdarat dr. Karneni">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="fasyankes_cd" class="col-md-2 col-sm-4 col-form-label">Kode Fasyankes / RS</label>
+                <div class="col-md-4 col-sm-6">
+                  <input type="text" class="form-control" id="fasyankes_cd" name="fasyankes_cd" value="{{ $main['fasyankes_cd'] ?? '' }}" placeholder="Contoh: 3504012">
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="alamat_lengkap" class="col-md-2 col-sm-4 col-form-label">Alamat Lengkap</label>
                 <div class="col-md-6 col-sm-8">
-                  <textarea class="form-control" id="alamat_lengkap" name="alamat_lengkap" rows="3" placeholder="Alamat lengkap perusahaan">{{ $main['alamat_lengkap'] ?? '' }}</textarea>
+                  <textarea class="form-control" id="alamat_lengkap" name="alamat_lengkap" rows="3" placeholder="Alamat lengkap rumah sakit">{{ $main['alamat_lengkap'] ?? '' }}</textarea>
                 </div>
               </div>
 
               <div class="row mb-3">
-                <label for="pimpinan_nm" class="col-md-2 col-sm-4 col-form-label">Nama Pimpinan</label>
+                <label for="direktur_nm" class="col-md-2 col-sm-4 col-form-label">Direktur / Kepala RS</label>
                 <div class="col-md-5 col-sm-8">
-                  <input type="text" class="form-control" id="pimpinan_nm" name="pimpinan_nm" value="{{ $main['pimpinan_nm'] ?? '' }}" placeholder="Contoh: Budi Santoso">
+                  <input type="text" class="form-control" id="direktur_nm" name="direktur_nm" value="{{ $main['direktur_nm'] ?? '' }}" placeholder="Contoh: dr. Karneni">
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="telp_no" class="col-md-2 col-sm-4 col-form-label">No. Telepon / WA</label>
                 <div class="col-md-4 col-sm-6">
-                  <input type="text" class="form-control" id="telp_no" name="telp_no" value="{{ $main['telp_no'] ?? '' }}" placeholder="Contoh: 08123456789">
+                  <input type="text" class="form-control" id="telp_no" name="telp_no" value="{{ $main['telp_no'] ?? '' }}" placeholder="Contoh: 0355-567890">
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="email" class="col-md-2 col-sm-4 col-form-label">Email</label>
                 <div class="col-md-5 col-sm-8">
-                  <input type="email" class="form-control" id="email" name="email" value="{{ $main['email'] ?? '' }}" placeholder="Contoh: info@perusahaan.com">
+                  <input type="email" class="form-control" id="email" name="email" value="{{ $main['email'] ?? '' }}" placeholder="Contoh: info@rsudcampurdarat.com">
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="website" class="col-md-2 col-sm-4 col-form-label">Website</label>
                 <div class="col-md-5 col-sm-8">
-                  <input type="text" class="form-control" id="website" name="website" value="{{ $main['website'] ?? '' }}" placeholder="Contoh: www.perusahaan.com">
+                  <input type="text" class="form-control" id="website" name="website" value="{{ $main['website'] ?? '' }}" placeholder="Contoh: rsudcampurdarat.tulungagung.go.id">
                 </div>
               </div>
 
@@ -88,9 +95,9 @@
               </div>
 
               <div class="row mb-3">
-                <label for="nib_no" class="col-md-2 col-sm-4 col-form-label">No. NIB</label>
-                <div class="col-md-4 col-sm-6">
-                  <input type="text" class="form-control" id="nib_no" name="nib_no" value="{{ $main['nib_no'] ?? '' }}" placeholder="Nomor Induk Berusaha">
+                <label for="izin_operasional_no" class="col-md-2 col-sm-4 col-form-label">No. Izin Operasional</label>
+                <div class="col-md-5 col-sm-8">
+                  <input type="text" class="form-control" id="izin_operasional_no" name="izin_operasional_no" value="{{ $main['izin_operasional_no'] ?? '' }}" placeholder="Contoh: 440/123/OPERASIONAL/2025">
                 </div>
               </div>
 
@@ -98,34 +105,6 @@
                 <label for="mulai_data_tgl" class="col-md-2 col-sm-4 col-form-label">Tgl. Mulai Data</label>
                 <div class="col-md-2 col-sm-6">
                   <input type="date" class="form-control" id="mulai_data_tgl" name="mulai_data_tgl" value="{{ $main['mulai_data_tgl'] ?? '' }}">
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="periode_akuntansi" class="col-md-2 col-sm-4 col-form-label">Periode Akuntansi</label>
-                <div class="col-md-2 col-sm-6">
-                  <select class="form-select" id="periode_akuntansi" name="periode_akuntansi">
-                    <option value="">-- Pilih Periode --</option>
-                    @php
-                      $periodes = [
-                        '01-12' => 'Januari - Desember',
-                        '02-01' => 'Februari - Januari',
-                        '03-02' => 'Maret - Februari',
-                        '04-03' => 'April - Maret',
-                        '05-04' => 'Mei - April',
-                        '06-05' => 'Juni - Mei',
-                        '07-06' => 'Juli - Juni',
-                        '08-07' => 'Agustus - Juli',
-                        '09-08' => 'September - Agustus',
-                        '10-09' => 'Oktober - September',
-                        '11-10' => 'November - Oktober',
-                        '12-11' => 'Desember - November'
-                      ];
-                    @endphp
-                    @foreach($periodes as $val => $label)
-                      <option value="{{ $val }}" {{ (isset($main['periode_akuntansi']) && $main['periode_akuntansi'] == $val) ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                  </select>
                 </div>
               </div>
 
