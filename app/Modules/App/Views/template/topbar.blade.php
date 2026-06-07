@@ -5,9 +5,9 @@
   <button class="btn-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
   <div class="topbar-breadcrumb">
     @if (!empty($parent_title) && $parent_title !== $module_title)
-      <small>{{ $module_title ?? 'AccuCount' }} / {{ $parent_title }} /</small>
+    <small>{{ $module_title ?? 'Remunerasi' }} / {{ $parent_title }} /</small>
     @else
-      <small>{{ $module_title ?? 'AccuCount' }} /</small>
+    <small>{{ $module_title ?? 'Remunerasi' }} /</small>
     @endif
     <span class="page-title" id="pageTitle">{{ $menu_title ?? 'Dashboard' }}</span>
   </div>

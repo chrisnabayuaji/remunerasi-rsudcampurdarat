@@ -7,10 +7,12 @@
 <nav id="sidebar">
   <!-- Brand -->
   <div class="sidebar-brand">
-    <div class="logo-wrap"><i class="fa-solid fa-chart-line"></i></div>
+    <div class="logo-wrap">
+      <img src="{{ asset('favicon.png') }}" alt="Logo" style="width: 24px; height: 24px; object-fit: contain;">
+    </div>
     <div class="brand-text">
-      <span class="brand-name">{{ $identitas['aplikasi_merk'] ?? 'AccuCount' }}</span><br>
-      <span class="brand-sub">Enterprise Suite</span>
+      <span class="brand-name">{{ $identitas['aplikasi_merk'] }}</span><br>
+      <span class="brand-sub">{{ $identitas['aplikasi_singkatan_nm'] }}</span>
     </div>
   </div>
 

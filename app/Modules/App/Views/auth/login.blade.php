@@ -70,7 +70,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(191, 54, 12, 0.72) 0%, rgba(230, 81, 0, 0.45) 55%, rgba(255, 109, 0, 0.20) 100%);
+      background: linear-gradient(to top, rgba(13, 71, 161, 0.82) 0%, rgba(21, 101, 192, 0.55) 55%, rgba(33, 150, 243, 0.20) 100%);
     }
 
     .visual-content {
@@ -412,7 +412,7 @@
         <!-- BRAND -->
         <div class="brand-logo">
           <div class="logo-icon">
-            <i class="fa-solid fa-hospital"></i>
+            <img src="{{ asset('favicon.png') }}" alt="Logo" style="width: 32px; height: 32px; object-fit: contain;">
           </div>
           <div>
             <div class="brand-name">{{ $identitas['aplikasi_merk'] }}</div>
