@@ -56,7 +56,7 @@
     .login-visual {
       flex: 1.2;
       position: relative;
-      background: url('{{ asset("storage/dist/images/login_bg.png") }}') no-repeat center center;
+      background: url('{{ asset("storage/dist/images/login_bg.jpg") }}') no-repeat center center;
       background-size: cover;
       display: flex;
       flex-direction: column;
@@ -69,7 +69,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(13, 71, 161, 0.92) 0%, rgba(230, 81, 0, 0.55) 55%, rgba(13, 71, 161, 0.25) 100%);
+      background: linear-gradient(to top, rgba(191, 54, 12, 0.72) 0%, rgba(230, 81, 0, 0.45) 55%, rgba(255, 109, 0, 0.20) 100%);
     }
 
     .visual-content {
@@ -122,7 +122,7 @@
       width: 52px;
       height: 52px;
       border-radius: 14px;
-      background: linear-gradient(135deg, var(--orange), var(--primary));
+      background: linear-gradient(135deg, var(--accent), var(--orange-dark));
       display: grid;
       place-items: center;
       font-size: 22px;
@@ -316,6 +316,7 @@
       color: var(--muted);
       font-size: 12px;
     }
+
     .divider-or::before,
     .divider-or::after {
       content: '';
@@ -329,21 +330,24 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, var(--primary-xlight), var(--orange-xlight));
-      border: 1px solid #BBDEFB;
+      background: linear-gradient(135deg, var(--primary-xlight), var(--primary-light));
+      border: 1px solid #90CAF9;
       border-radius: 10px;
       padding: 10px 14px;
       margin-bottom: 28px;
     }
+
     .rsud-badge-icon {
       font-size: 20px;
       color: var(--primary);
     }
+
     .rsud-badge-text {
       font-size: 11.5px;
       color: var(--text);
       line-height: 1.4;
     }
+
     .rsud-badge-text strong {
       display: block;
       font-size: 12.5px;
