@@ -124,3 +124,57 @@ Desain UI didominasi warna orange/amber dari halaman login untuk memberikan kesa
 * **`fsSave(event)`**: Menjalankan validasi input form menggunakan plugin jQuery Validation, menampilkan spinner loading pada tombol, menonaktifkan tombol submit selama proses, lalu melakukan form submission.
 * **`fsDeleteConfirm(event, {url: '...'})`**: Menampilkan konfirmasi pop-up SweetAlert2 bertema orange sebelum menghapus data.
 * **`formatRupiah(angka)`**: Mengubah angka numerik ke format IDR Rupiah (contoh: `Rp 150.000,00`).
+
+---
+
+## 6. Rencana Timeline Pengerjaan Proyek (6 Minggu / 1.5 Bulan)
+
+Berikut adalah pembagian jadwal kerja taktis berdurasi 1.5 bulan (6 minggu) menuju go-live:
+
+### 📅 Minggu 1: Inisiasi Database & Setup Data Master Dasar
+* **Fokus**: Konstruksi database PostgreSQL awal dan pembuatan menu dasar master pegawai.
+* **Detail Tugas**:
+  * Perancangan & pembuatan tabel database (`app_user`, `app_role`, `app_pegawai`, `app_penjamin`) mengikuti standar letak kolom audit di urutan paling awal.
+  * Pembuatan Modul **Master Pegawai & Medis** (Dokter Spesialis, Dokter Umum, Perawat, Nakes Lain, Staf Admin).
+  * Pembuatan Modul **Master Penjamin** (Umum, BPJS, Asuransi Swasta, Jamkesda).
+* **Target Output**: Halaman antarmuka manajemen pegawai dan penjamin siap digunakan.
+
+### 📅 Minggu 2: Formula Pembagian Jasa (Tarif & Komponen)
+* **Fokus**: Implementasi visual parameter perhitungan dan pembagian tarif tindakan.
+* **Detail Tugas**:
+  * Pembuatan Modul **Master Variabel & Indeks** (Skor IKI, IKU, Basic Index, Kompetensi).
+  * Pembuatan Modul **Master Komponen Jasa Medis** (Porsi rumah sakit, manajemen, jasa langsung, porsi kebersamaan).
+  * Pembuatan Modul **Master Tarif Tindakan & Jasa** (Korelasikan tarif billing RS dengan persentase bagi hasil medis).
+* **Target Output**: Halaman master tarif dan formula komponen bagi-hasil selesai dibuat.
+
+### 📅 Minggu 3: Integrasi Data SIMRS (Tarik Billing)
+* **Fokus**: Pembuatan jalur bridging data transaksi dari database SIMRS/Billing.
+* **Detail Tugas**:
+  * Pembuatan Modul **Tarik Billing SIMRS** (koneksi API / DB View SIMRS).
+  * Pembuatan filter sinkronisasi data tagihan (berdasarkan penjamin, tanggal bayar, status lunas dari kasir).
+  * Implementasi pencatatan log sinkronisasi data pelayanan untuk antisipasi audit selisih data.
+* **Target Output**: Data transaksi pelayanan medis berhasil disinkronkan dari SIMRS ke DB Remunerasi.
+
+### 📅 Minggu 4: Engine Perhitungan Jasa Pelayanan
+* **Fokus**: Pengembangan logika utama kalkulator pembagian jasa medis per tindakan.
+* **Detail Tugas**:
+  * Pembuatan Modul **Perhitungan Jasa Medis** (Logika pemecahan tarif tindakan ke porsi Dokter DPJP, Dokter Pendamping, Perawat, dan Asisten Pelaksana).
+  * Implementasi fitur manual override (penyesuaian manual porsi oleh operator keuangan jika terjadi kasus khusus di lapangan).
+* **Target Output**: Engine bagi-hasil otomatis untuk jasa pelayanan per tindakan siap pakai.
+
+### 📅 Minggu 5: Distribusi Remunerasi Akhir & Slip/Laporan
+* **Fokus**: Finalisasi rekap remunerasi bulanan pegawai dan cetak PDF.
+* **Detail Tugas**:
+  * Pembuatan Modul **Distribusi Remunerasi** (Penggabungan nominal Jasa Pelayanan Langsung dengan perolehan skor Indeks Pegawai).
+  * Pembuatan Modul **Slip Remunerasi Pegawai** (dengan fitur cetak ke PDF).
+  * Pembuatan **Laporan Rekapitulasi per Pegawai, per Unit/Instalasi**, dan **Laporan Realisasi Anggaran**.
+* **Target Output**: Dashboard laporan lengkap dan slip remunerasi PDF siap cetak.
+
+### 📅 Minggu 6: Pengujian (UAT), Optimasi Query, & Go-Live
+* **Fokus**: Audit akurasi angka keuangan, optimasi kecepatan, dan serah terima sistem.
+* **Detail Tugas**:
+  * Pengujian akurasi perhitungan data (membandingkan hasil kalkulasi sistem dengan data hitungan manual MS Excel milik RS).
+  * Optimasi performa database (penerapan indeks tabel agar pencarian transaksi tindakan bernominal besar tetap cepat).
+  * User Acceptance Testing (UAT) bersama jajaran Direksi, Komite Medis, dan Keuangan RSUD Campurdarat.
+  * Deployment ke server produksi rumah sakit.
+* **Target Output**: Sistem remunerasi aktif 100% (Go-Live).
