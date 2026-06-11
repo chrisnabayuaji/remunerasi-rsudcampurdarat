@@ -59,29 +59,30 @@ class DbModel extends Model
     }
   }
 
-  static function rawData(String $init, String $query, Array $params = [])
+  static function rawData(String $init, String $query, Array $params = [], $connection = null)
   {
     try {
+      $db = $connection ? DB::connection($connection) : DB::getFacadeRoot();
       $result = null;
       switch ($init) {
         case 'result_array':
-          $result = DB::select($query, $params);
+          $result = $db->select($query, $params);
           break;
 
         case 'row_array':
-          $result = DB::selectOne($query, $params);
+          $result = $db->selectOne($query, $params);
           break;
 
         case 'row':
-          $result = DB::selectOne($query, $params);
+          $result = $db->selectOne($query, $params);
           break;
 
         case 'num_rows':
-          $result = DB::select($query, $params);
+          $result = $db->select($query, $params);
           break;
 
         default:
-          $result = DB::selectOne($query, $params);
+          $result = $db->selectOne($query, $params);
           break;
       }
       return json_decode(json_encode($result), true);
@@ -221,7 +222,7 @@ class DbModel extends Model
     DB::rollBack();
   }
 
-  public static function datatablesQuery(String $query, Array $keyword, Array $where, $isWhere = null)
+  public static function datatablesQuery(String $query, Array $keyword, Array $where, $isWhere = null, $connection = null)
   {
     // Params
     $d = fsPost();
@@ -294,12 +295,12 @@ class DbModel extends Model
 
     $queryData .= " LIMIT " . $limit . " OFFSET " . $start;
 
-    $data = self::rawData('result_array', $queryData);
-    $recordsTotal = self::rawData('row_array', $queryAllRecord)['count'];
+    $data = self::rawData('result_array', $queryData, [], $connection);
+    $recordsTotal = self::rawData('row_array', $queryAllRecord, [], $connection)['count'];
 
     if ($keyword != null && count($keyword) > 0) {
       $queryRecordsFiltered = strReplaceBetween($queryFiltered, 'SELECT', 'FROM', ' COUNT(1) AS count ');
-      $recordsFiltered = self::rawData('row_array', $queryRecordsFiltered)['count'];
+      $recordsFiltered = self::rawData('row_array', $queryRecordsFiltered, [], $connection)['count'];
     } else {
       $recordsFiltered = $recordsTotal;
     }
