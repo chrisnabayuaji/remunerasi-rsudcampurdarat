@@ -9,9 +9,11 @@
         <button type="button" class="btn btn-info rounded-3 px-4 shadow-sm" id="btnSync" title="Sinkronisasi Data dari SIMRS">
           <i class="fas fa-sync me-2"></i>Sinkronisasi
         </button>
+        {{-- FITUR TAMBAH DATA - Uncomment jika diperlukan
         <button type="button" class="btn btn-primary rounded-3 px-4 shadow-sm" onclick="fsModalShow(event, {url: '{{ $nav_url }}/form_modal?n={{ $nav_id }}', title: 'Tambah Penjamin Baru'})">
           <i class="fas fa-plus me-2"></i>Tambah Data
         </button>
+        --}}
       </div>
     </div>
 
@@ -52,7 +54,9 @@
                 <thead>
                   <tr>
                     <th class="text-center" width="70">No</th>
+                    {{-- FITUR AKSI - Uncomment jika diperlukan
                     <th class="text-start" width="80">Aksi</th>
+                    --}}
                     <th class="text-start">ID Penjamin</th>
                     <th class="text-start">Nama Penjamin</th>
                     <th class="text-center" width="80">BPJS</th>
