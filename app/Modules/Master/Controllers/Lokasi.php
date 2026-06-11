@@ -4,23 +4,23 @@ namespace App\Modules\Master\Controllers;
 
 use App\Http\Controllers\BaseController;
 use App\Models\DbModel;
-use App\Modules\Master\Models\PenjaminModel;
+use App\Modules\Master\Models\LokasiModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class Penjamin extends BaseController
+class Lokasi extends BaseController
 {
   public function __construct()
   {
     parent::__construct();
-    $this->template = 'master::penjamin.';
+    $this->template = 'master::lokasi.';
   }
 
   function index()
   {
     $d = [];
     $d['last_sync'] = DB::table('sync_log')
-      ->where('table_name', 'mst_penjamin')
+      ->where('table_name', 'mst_lokasi')
       ->where('status', 'success')
       ->orderBy('synced_at', 'desc')
       ->first();
@@ -29,7 +29,7 @@ class Penjamin extends BaseController
 
   function form_modal($id = null)
   {
-    $d['main'] = DB::table('mst_penjamin')->where('penjamin_id', $id)->first();
+    $d['main'] = DB::table('mst_lokasi')->where('lokasi_id', $id)->first();
     if ($d['main']) {
       $d['main'] = json_decode(json_encode($d['main']), true);
     }
@@ -37,7 +37,7 @@ class Penjamin extends BaseController
     return $this->renderView($this->template . 'formModal', $d);
   }
 
-  function edit($id)
+  function edit(String $id)
   {
     return $this->form_modal($id);
   }
@@ -49,13 +49,13 @@ class Penjamin extends BaseController
     DbModel::beginTransaction();
     try {
       if ($id == null) {
-        $insertData = DbModel::insertData('mst_penjamin', $d);
+        $insertData = DbModel::insertData('mst_lokasi', $d);
         if (!$insertData) {
           throw new \Exception("Gagal menyimpan data", 1);
         }
         $message = "Data sukses ditambah!";
       } else {
-        $updateData = DbModel::updateData('mst_penjamin', $d, ['penjamin_id' => $id]);
+        $updateData = DbModel::updateData('mst_lokasi', $d, ['lokasi_id' => $id]);
         if (!$updateData) {
           throw new \Exception("Gagal mengubah data", 1);
         }
@@ -63,7 +63,7 @@ class Penjamin extends BaseController
       }
       DbModel::commitTransaction();
       return redirect()
-        ->to('master/penjamin?n=' . $this->nav_id)
+        ->to('master/lokasi?n=' . $this->nav_id)
         ->with('flash_success', $message);
     } catch (\Throwable $th) {
       DbModel::rollbackTransaction();
@@ -72,22 +72,22 @@ class Penjamin extends BaseController
         throw $th;
       }
       return redirect()
-        ->to('master/penjamin?n=' . $this->nav_id)
+        ->to('master/lokasi?n=' . $this->nav_id)
         ->with('flash_error', 'Terjadi kesalahan sistem. Silakan coba lagi!');
     }
   }
 
-  function delete($id, $token)
+  function delete(String $id, String $token)
   {
     try {
       if (session()->token() !== $token) {
         throw new \Exception("Token tidak valid", 1);
       }
-      $deleteData = DbModel::deleteData('mst_penjamin', ['penjamin_id' => $id], false);
+      $deleteData = DbModel::deleteData('mst_lokasi', ['lokasi_id' => $id], false);
       if (!$deleteData) {
         throw new \Exception("Gagal menghapus data", 1);
       }
-      return redirect()->to('master/penjamin?n=' . $this->nav_id)->with('flash_success', 'Data sukses dihapus');
+      return redirect()->to('master/lokasi?n=' . $this->nav_id)->with('flash_success', 'Data sukses dihapus');
     } catch (\Throwable $th) {
       DbModel::rollbackTransaction();
       Log::error($th->getMessage());
@@ -95,14 +95,14 @@ class Penjamin extends BaseController
         throw $th;
       }
       return redirect()
-        ->to('master/penjamin?n=' . $this->nav_id)
+        ->to('master/lokasi?n=' . $this->nav_id)
         ->with('flash_error', 'Terjadi kesalahan sistem. Silakan coba lagi!');
     }
   }
 
   function ajax_datatables()
   {
-    return PenjaminModel::loadDatatables();
+    return LokasiModel::loadDatatables();
   }
 
   function sync()
@@ -114,13 +114,13 @@ class Penjamin extends BaseController
       $startTime = microtime(true);
 
       // Get all data from SIMRS (including deleted)
-      $simrsData = DB::connection('simrs')->table('mst_penjamin')->get();
+      $simrsData = DB::connection('simrs')->table('mst_lokasi')->get();
 
       if ($simrsData->isEmpty()) {
         DB::rollBack();
         return response()->json([
           'success' => false,
-          'message' => 'Tidak ada data penjamin di SIMRS'
+          'message' => 'Tidak ada data lokasi di SIMRS'
         ]);
       }
 
@@ -137,18 +137,37 @@ class Penjamin extends BaseController
       // Process each record
       foreach ($simrsData as $record) {
         try {
-          $simrsIds[] = $record->penjamin_id;
+          $simrsIds[] = $record->lokasi_id;
 
-          $exists = DB::table('mst_penjamin')->where('penjamin_id', $record->penjamin_id)->first();
+          $exists = DB::table('mst_lokasi')->where('lokasi_id', $record->lokasi_id)->first();
 
           $data = [
-            'penjamin_id' => $record->penjamin_id,
-            'penjamin_nm' => $record->penjamin_nm,
-            'bpjs_st' => $record->bpjs_st ?? 1,
-            'permanent_st' => $record->permanent_st ?? 1,
-            'urut_no' => $record->urut_no ?? 99,
-            'margin_farmasi' => $record->margin_farmasi,
-            'ris_id' => $record->ris_id,
+            'lokasi_id' => $record->lokasi_id,
+            'lokasi_parent' => $record->lokasi_parent,
+            'lokasi_nm' => $record->lokasi_nm,
+            'lokasi_tp' => $record->lokasi_tp,
+            'jenisregistrasi_id' => $record->jenisregistrasi_id,
+            'lokasiloket_id' => $record->lokasiloket_id,
+            'kelasdefault_id' => $record->kelasdefault_id,
+            'memilikibed_st' => $record->memilikibed_st ?? 0,
+            'lokasidepo_st' => $record->lokasidepo_st ?? 0,
+            'bpjs_cd' => $record->bpjs_cd,
+            'antrian_cd' => $record->antrian_cd,
+            'lokasi_map' => $record->lokasi_map,
+            'bpjs_nm' => $record->bpjs_nm,
+            'shift_id' => $record->shift_id,
+            'lokasidepo_id' => $record->lokasidepo_id,
+            'lokasiapotek_id' => $record->lokasiapotek_id,
+            'lokasiapotek_st' => $record->lokasiapotek_st ?? 0,
+            'registrasionline_st' => $record->registrasionline_st ?? 0,
+            'lokasi_submap' => $record->lokasi_submap,
+            'monitoring_st' => $record->monitoring_st ?? 0,
+            'ihs_id' => $record->ihs_id,
+            'jenislokasi_id' => $record->jenislokasi_id,
+            'bpjs_sub_cd' => $record->bpjs_sub_cd,
+            'lokasikasir_id' => $record->lokasikasir_id,
+            'lokasikasir_st' => $record->lokasikasir_st ?? 0,
+            'jenispelayanansirs_id' => $record->jenispelayanansirs_id,
             'active_st' => $record->active_st ?? 1,
             'deleted_st' => $record->deleted_st ?? 0,
             'external_id' => $record->external_id,
@@ -161,29 +180,29 @@ class Penjamin extends BaseController
           ];
 
           if ($exists) {
-            DB::table('mst_penjamin')->where('penjamin_id', $record->penjamin_id)->update($data);
+            DB::table('mst_lokasi')->where('lokasi_id', $record->lokasi_id)->update($data);
             $stats['updated']++;
           } else {
-            DB::table('mst_penjamin')->insert($data);
+            DB::table('mst_lokasi')->insert($data);
             $stats['inserted']++;
           }
         } catch (\Exception $e) {
           $stats['errors']++;
-          $stats['error_details'][] = "penjamin_id: {$record->penjamin_id} - " . $e->getMessage();
-          Log::error("Error syncing penjamin {$record->penjamin_id}: " . $e->getMessage());
+          $stats['error_details'][] = "lokasi_id: {$record->lokasi_id} - " . $e->getMessage();
+          Log::error("Error syncing lokasi {$record->lokasi_id}: " . $e->getMessage());
         }
       }
 
       // Handle orphaned data (exists in local but not in SIMRS)
       $placeholders = implode(',', array_fill(0, count($simrsIds), '?'));
-      $orphanedData = DB::table('mst_penjamin')
-        ->whereRaw("penjamin_id NOT IN ($placeholders)", $simrsIds)
+      $orphanedData = DB::table('mst_lokasi')
+        ->whereRaw("lokasi_id NOT IN ($placeholders)", $simrsIds)
         ->where('deleted_st', 0)
         ->get();
 
       foreach ($orphanedData as $orphan) {
         try {
-          DB::table('mst_penjamin')->where('penjamin_id', $orphan->penjamin_id)->update([
+          DB::table('mst_lokasi')->where('lokasi_id', $orphan->lokasi_id)->update([
             'deleted_st' => 1,
             'active_st' => 0,
             'deleted_at' => date('Y-m-d H:i:s'),
@@ -192,7 +211,7 @@ class Penjamin extends BaseController
           $stats['deleted']++;
         } catch (\Exception $e) {
           $stats['errors']++;
-          Log::error("Error deleting orphaned penjamin {$orphan->penjamin_id}: " . $e->getMessage());
+          Log::error("Error deleting orphaned lokasi {$orphan->lokasi_id}: " . $e->getMessage());
         }
       }
 
@@ -201,7 +220,7 @@ class Penjamin extends BaseController
       // Log sync result
       $syncStatus = $stats['errors'] > 0 ? 'partial_success' : 'success';
       DB::table('sync_log')->insert([
-        'table_name' => 'mst_penjamin',
+        'table_name' => 'mst_lokasi',
         'sync_type' => 'full',
         'records_synced' => $stats['inserted'] + $stats['updated'],
         'status' => $syncStatus,
@@ -229,11 +248,11 @@ class Penjamin extends BaseController
       ]);
     } catch (\Exception $e) {
       DB::rollBack();
-      Log::error('Error syncing penjamin: ' . $e->getMessage());
+      Log::error('Error syncing lokasi: ' . $e->getMessage());
 
       // Log error
       DB::table('sync_log')->insert([
-        'table_name' => 'mst_penjamin',
+        'table_name' => 'mst_lokasi',
         'sync_type' => 'full',
         'records_synced' => 0,
         'status' => 'error',
@@ -252,7 +271,7 @@ class Penjamin extends BaseController
   function get_last_sync()
   {
     $lastSync = DB::table('sync_log')
-      ->where('table_name', 'mst_penjamin')
+      ->where('table_name', 'mst_lokasi')
       ->where('status', 'success')
       ->orderBy('synced_at', 'desc')
       ->first();

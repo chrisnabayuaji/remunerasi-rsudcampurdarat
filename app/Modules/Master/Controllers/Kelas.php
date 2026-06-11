@@ -175,8 +175,9 @@ class Kelas extends BaseController
       }
 
       // Handle orphaned data (exists in local but not in SIMRS)
+      $placeholders = implode(',', array_fill(0, count($simrsIds), '?'));
       $orphanedData = DB::table('mst_kelas')
-        ->whereNotIn('kelas_id', $simrsIds)
+        ->whereRaw("kelas_id NOT IN ($placeholders)", $simrsIds)
         ->where('deleted_st', 0)
         ->get();
 

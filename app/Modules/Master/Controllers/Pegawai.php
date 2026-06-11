@@ -172,8 +172,9 @@ class Pegawai extends BaseController
       }
 
       // Handle data yang ada di database utama tapi tidak ada di SIMRS (soft delete)
+      $placeholders = implode(',', array_fill(0, count($simrsIds), '?'));
       $orphanedData = DB::table('mst_pegawai')
-        ->whereNotIn('pegawai_id', $simrsIds)
+        ->whereRaw("pegawai_id NOT IN ($placeholders)", $simrsIds)
         ->where('deleted_st', 0)
         ->get();
 
