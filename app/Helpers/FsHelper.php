@@ -231,3 +231,26 @@ if (!function_exists('fsDecrypt')) {
     }
   }
 }
+
+if (!function_exists('generateId')) {
+  function generateId($table, $column, $length = 12)
+  {
+    $lastId = \Illuminate\Support\Facades\DB::table($table)
+      ->max($column);
+    
+    if ($lastId) {
+      $nextId = (int) $lastId + 1;
+    } else {
+      $nextId = 1;
+    }
+    
+    return str_pad($nextId, $length, '0', STR_PAD_LEFT);
+  }
+}
+
+if (!function_exists('csrfValidate')) {
+  function csrfValidate($token)
+  {
+    return hash_equals(csrf_token(), $token);
+  }
+}
