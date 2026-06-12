@@ -11,7 +11,7 @@
         </button>
         {{-- FITUR TAMBAH DATA - Uncomment jika diperlukan
         <button type="button" class="btn btn-primary rounded-3 px-4 shadow-sm" onclick="fsModalShow(event, {url: '{{ $nav_url }}/form_modal?n={{ $nav_id }}', title: 'Tambah Tarif Baru'})">
-          <i class="fas fa-plus me-2"></i>Tambah Data
+        <i class="fas fa-plus me-2"></i>Tambah Data
         </button>
         --}}
       </div>
@@ -35,11 +35,29 @@
       <i class="fas fa-info-circle me-2"></i>
       <strong>Informasi Sinkronisasi:</strong>
       @if($last_sync)
-        Terakhir sinkronisasi: {{ \Carbon\Carbon::parse($last_sync->synced_at)->format('d M Y H:i:s') }}
-        ({{ $last_sync->records_synced }} data)
+      Terakhir sinkronisasi: {{ \Carbon\Carbon::parse($last_sync->synced_at)->format('d M Y H:i:s') }}
+      ({{ $last_sync->records_synced }} data)
       @else
-        Belum pernah dilakukan sinkronisasi
+      Belum pernah dilakukan sinkronisasi
       @endif
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-3">
+          <div class="col-md-4 col-lg-3">
+            <label class="form-label mb-1" style="font-weight: 600; font-size: 13px;"><i class="fas fa-filter text-primary me-1"></i> Kelompok Tarif</label>
+            <select class="form-select form-select-sm fs-chose" id="filter_tarif_tp">
+              <option value="" {{ session('tarif_parent_filter') === '' || session('tarif_parent_filter') === null ? 'selected' : '' }}>Semua Kelompok Tarif</option>
+              @foreach($list_paket as $paket)
+              <option value="{{ $paket->tarif_id }}" {{ session('tarif_parent_filter') === $paket->tarif_id ? 'selected' : '' }}>
+                {{ $paket->tarif_nm }} ({{ $paket->tarif_id }})
+              </option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="row g-3 mb-4">

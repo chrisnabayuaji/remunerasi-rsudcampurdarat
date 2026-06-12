@@ -24,6 +24,11 @@ class Tarif extends BaseController
       ->where('status', 'success')
       ->orderBy('synced_at', 'desc')
       ->first();
+    $d['list_paket'] = DB::table('mst_tarif')
+      ->where('tarif_tp', 'G')
+      ->where('deleted_st', 0)
+      ->orderBy('tarif_id', 'asc')
+      ->get();
     return $this->renderView($this->template . 'index', $d);
   }
 
@@ -183,12 +188,41 @@ class Tarif extends BaseController
 
       // Bulk upsert using chunks of 500
       $updateColumns = [
-        'tarif_nm', 'tarif_parent', 'kelompoktarif_id', 'akun_id', 'inacbg_id', 'tarif_tp', 
-        'tipetarif_id', 'tarif_map', 'order_list', 'lis_map', 'external_id_2', 'icd9_id', 
-        'loinc_id', 'loinc_desc', 'tarifsatuan_id', 'score', 'bhp_st', 'tipesampel_id', 
-        'tipesampel_cd', 'sktarif_id', 'modality_id', 'unit_cost', 'kelompokkelas_id', 
-        'parent_cd', 'tarif_cd', 'loinc_reference', 'active_st', 'deleted_st', 'external_id',
-        'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by',
+        'tarif_nm',
+        'tarif_parent',
+        'kelompoktarif_id',
+        'akun_id',
+        'inacbg_id',
+        'tarif_tp',
+        'tipetarif_id',
+        'tarif_map',
+        'order_list',
+        'lis_map',
+        'external_id_2',
+        'icd9_id',
+        'loinc_id',
+        'loinc_desc',
+        'tarifsatuan_id',
+        'score',
+        'bhp_st',
+        'tipesampel_id',
+        'tipesampel_cd',
+        'sktarif_id',
+        'modality_id',
+        'unit_cost',
+        'kelompokkelas_id',
+        'parent_cd',
+        'tarif_cd',
+        'loinc_reference',
+        'active_st',
+        'deleted_st',
+        'external_id',
+        'created_at',
+        'created_by',
+        'updated_at',
+        'updated_by',
+        'deleted_at',
+        'deleted_by',
         'nominal'
       ];
 
@@ -207,7 +241,7 @@ class Tarif extends BaseController
       } else {
         // Chunk or use temporary table if too large, but for 4000 rows, a raw subquery or batching whereNotIn is fine
         // Let's do it in batches of 1000 for whereNotIn
-        $orphanedDataQuery->where(function($query) use ($simrsIds) {
+        $orphanedDataQuery->where(function ($query) use ($simrsIds) {
           $chunks = array_chunk($simrsIds, 1000);
           foreach ($chunks as $chunk) {
             $query->whereNotIn('tarif_id', $chunk);
@@ -296,5 +330,12 @@ class Tarif extends BaseController
       'success' => true,
       'data' => $lastSync
     ]);
+  }
+
+  function set_filter()
+  {
+    $tarif_tp = request()->get('tarif_tp');
+    session(['tarif_parent_filter' => $tarif_tp]);
+    return response()->json(['success' => true]);
   }
 }

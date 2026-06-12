@@ -14,6 +14,12 @@ class TarifModel extends Model
 
   static function loadDatatables()
   {
+    $tarif_parent = session('tarif_parent_filter');
+    $filter_sql = "";
+    if ($tarif_parent !== null && $tarif_parent !== '') {
+      $filter_sql = " AND a.tarif_parent = " . \Illuminate\Support\Facades\DB::connection()->getPdo()->quote($tarif_parent);
+    }
+
     $query = "SELECT 
               x.*
             FROM (
@@ -22,7 +28,7 @@ class TarifModel extends Model
               FROM mst_tarif a
               WHERE
                 a.deleted_st = 0
-                AND a.tarif_tp = 'G'
+                {$filter_sql}
             ) x ";
     $search = ['tarif_id', 'tarif_nm', 'inacbg_id', 'tarif_cd'];
     $where = [];

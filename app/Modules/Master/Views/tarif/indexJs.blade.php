@@ -148,5 +148,23 @@
         }
       });
     });
+
+    // Handle Tipe Tarif Filter Change
+    $('#filter_tarif_tp').change(function() {
+      var val = $(this).val();
+      $.ajax({
+        url: "{{ url($nav_url . '/set_filter') }}?n={{ $nav_id }}",
+        type: "POST",
+        data: {
+          _token: "{{ csrf_token() }}",
+          tarif_tp: val
+        },
+        success: function(response) {
+          if (response.success) {
+            table.ajax.reload();
+          }
+        }
+      });
+    });
   });
 </script>
