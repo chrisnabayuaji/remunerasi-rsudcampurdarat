@@ -83,6 +83,14 @@
           }
         },
         {
+          data: "nominal",
+          className: "align-middle text-end p-2",
+          render: function(data, type, row) {
+            var diff = parseFloat(row.nominal || 0) - parseFloat(row.unit_cost || 0);
+            return diff > 0 ? formatRupiah(diff) : '-';
+          }
+        },
+        {
           data: "jasa_sarana",
           className: "align-middle text-end p-2",
           render: renderPctNominal
