@@ -45,16 +45,23 @@
     <div class="row g-3 mb-3">
       <div class="card shadow-sm border-0">
         <div class="card-body p-3">
-          <div class="col-md-4 col-lg-3">
+          <div class="col-md-6 col-lg-4">
             <label class="form-label mb-1" style="font-weight: 600; font-size: 13px;"><i class="fas fa-filter text-primary me-1"></i> Kelompok Tarif</label>
-            <select class="form-select form-select-sm fs-chose" id="filter_tarif_tp">
-              <option value="" {{ session('tarif_parent_filter') === '' || session('tarif_parent_filter') === null ? 'selected' : '' }}>Semua Kelompok Tarif</option>
-              @foreach($list_paket as $paket)
-              <option value="{{ $paket->tarif_id }}" {{ session('tarif_parent_filter') === $paket->tarif_id ? 'selected' : '' }}>
-                {{ $paket->tarif_nm }} ({{ $paket->tarif_id }})
-              </option>
-              @endforeach
-            </select>
+            <div class="d-flex gap-2 align-items-center">
+              <div class="flex-grow-1">
+                <select class="form-select form-select-sm fs-chose" id="filter_tarif_tp">
+                  <option value="" {{ session('tarif_parent_filter') === '' || session('tarif_parent_filter') === null ? 'selected' : '' }}>Semua Kelompok Tarif</option>
+                  @foreach($list_paket as $paket)
+                  <option value="{{ $paket->tarif_id }}" {{ session('tarif_parent_filter') === $paket->tarif_id ? 'selected' : '' }}>
+                    {{ $paket->tarif_nm }} ({{ $paket->tarif_id }})
+                  </option>
+                  @endforeach
+                </select>
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-secondary px-3" id="btnResetFilter" title="Reset Pencarian" style="height: 38px;">
+                <i class="fas fa-undo me-1"></i>Reset
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -166,5 +166,10 @@
         }
       });
     });
+
+    // Handle Reset Filter Click
+    $('#btnResetFilter').click(function() {
+      $('#filter_tarif_tp').val('').trigger('change');
+    });
   });
 </script>
