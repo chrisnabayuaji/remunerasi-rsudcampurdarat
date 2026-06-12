@@ -1,9 +1,9 @@
 <script>
   function renderPctNominal(data, type, row) {
-    if (row.tarif_tp === 'G') return '-';
-    var pctStr = data ? data + ' %' : '0 %';
+    if (row.tarif_tp === 'G' || !data || parseFloat(data) === 0) return '-';
+    var pctStr = data + ' %';
     var base = parseFloat(row.nominal || 0) - parseFloat(row.unit_cost || 0);
-    if (base > 0 && parseFloat(data) > 0) {
+    if (base > 0) {
       var nominalShare = (parseFloat(data) / 100) * base;
       return pctStr + '<br><small class="text-muted">' + formatRupiah(nominalShare) + '</small>';
     }
@@ -11,12 +11,12 @@
   }
 
   function renderJasaLayananSubPct(data, type, row) {
-    if (row.tarif_tp === 'G') return '-';
-    var pctStr = data ? data + ' %' : '0 %';
+    if (row.tarif_tp === 'G' || !data || parseFloat(data) === 0) return '-';
+    var pctStr = data + ' %';
     var base = parseFloat(row.nominal || 0) - parseFloat(row.unit_cost || 0);
     var jasaLayananPct = parseFloat(row.jasa_layanan || 0);
     var jasaLayananNominal = (jasaLayananPct / 100) * base;
-    if (jasaLayananNominal > 0 && parseFloat(data) > 0) {
+    if (jasaLayananNominal > 0) {
       var nominalShare = (parseFloat(data) / 100) * jasaLayananNominal;
       return pctStr + '<br><small class="text-muted">' + formatRupiah(nominalShare) + '</small>';
     }
@@ -24,14 +24,14 @@
   }
 
   function renderRevenueCenterSubPct(data, type, row) {
-    if (row.tarif_tp === 'G') return '-';
-    var pctStr = data ? data + ' %' : '0 %';
+    if (row.tarif_tp === 'G' || !data || parseFloat(data) === 0) return '-';
+    var pctStr = data + ' %';
     var base = parseFloat(row.nominal || 0) - parseFloat(row.unit_cost || 0);
     var jasaLayananPct = parseFloat(row.jasa_layanan || 0);
     var jasaLayananNominal = (jasaLayananPct / 100) * base;
     var revenueCenterPct = parseFloat(row.revenue_center || 0);
     var revenueCenterNominal = (revenueCenterPct / 100) * jasaLayananNominal;
-    if (revenueCenterNominal > 0 && parseFloat(data) > 0) {
+    if (revenueCenterNominal > 0) {
       var nominalShare = (parseFloat(data) / 100) * revenueCenterNominal;
       return pctStr + '<br><small class="text-muted">' + formatRupiah(nominalShare) + '</small>';
     }
