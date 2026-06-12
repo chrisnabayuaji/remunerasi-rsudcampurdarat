@@ -67,113 +67,170 @@
         {
           data: "nilai",
           className: "align-middle text-end p-2",
-          render: function(data) {
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
             return data ? data + ' %' : '0 %';
           }
         },
         {
           data: "jasa_sarana",
           className: "align-middle text-end p-2",
-          render: function(data) {
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
             return data ? data + ' %' : '0 %';
           }
         },
         {
           data: "jasa_layanan",
           className: "align-middle text-end p-2",
-          render: function(data) {
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
             return data ? data + ' %' : '0 %';
           }
         },
         {
           data: "cost_center",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "revenue_center",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "direksi",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "direktur",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "kabag_kasie",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "post_rm",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "dokter_utama_dokter",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "dokter_utama_perawat",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "perawat_utama_dokter",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "perawat_utama_perawat",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "dengan_anestesi_dokter_operator",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "dengan_anestesi_dokter_anestesi",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "dengan_anestesi_perawat_ok",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "tanpa_anestesi_dokter_operator",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "tanpa_anestesi_perawat_ok",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "supir",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "rekam_medis",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "cssd_laundry",
           className: "align-middle text-end p-2",
-          render: function(data) { return data ? data + ' %' : '0 %'; }
+          render: function(data, type, row) {
+            if (row.tarif_tp === 'G') return '-';
+            return data ? data + ' %' : '0 %';
+          }
         },
         {
           data: "active_st",
