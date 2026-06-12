@@ -32,16 +32,7 @@
   #datatable-main th:nth-child(3),
   #datatable-main td:nth-child(3) {
     position: sticky;
-    left: 170px;
-    background-color: #fff !important;
-    z-index: 5;
-    box-shadow: inset -1px 0 0 #dee2e6;
-  }
-
-  #datatable-main th:nth-child(4),
-  #datatable-main td:nth-child(4) {
-    position: sticky;
-    left: 270px;
+    left: 190px;
     background-color: #fff !important;
     z-index: 5;
     box-shadow: inset -2px 0 0 #adb5bd; /* Stronger border at the freeze boundary */
@@ -50,8 +41,7 @@
   /* Make sure header stays on top */
   #datatable-main th:nth-child(1),
   #datatable-main th:nth-child(2),
-  #datatable-main th:nth-child(3),
-  #datatable-main th:nth-child(4) {
+  #datatable-main th:nth-child(3) {
     z-index: 6;
     background-color: #f8f9fa !important;
   }
@@ -59,8 +49,7 @@
   /* Ensure hover effect stays consistent */
   #datatable-main tr:hover td:nth-child(1),
   #datatable-main tr:hover td:nth-child(2),
-  #datatable-main tr:hover td:nth-child(3),
-  #datatable-main tr:hover td:nth-child(4) {
+  #datatable-main tr:hover td:nth-child(3) {
     background-color: #eceff1 !important;
   }
 </style>
@@ -109,6 +98,31 @@
       @endif
     </div>
 
+    <div class="row g-3 mb-3">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-3">
+          <div class="col-md-6 col-lg-4">
+            <label class="form-label mb-1" style="font-weight: 600; font-size: 13px;"><i class="fas fa-filter text-primary me-1"></i> Kelompok Tarif</label>
+            <div class="d-flex gap-2 align-items-center">
+              <div class="flex-grow-1">
+                <select class="form-select form-select-sm fs-chose" id="filter_tarif_tp">
+                  <option value="" {{ session('tarif_remunerasi_parent_filter') === '' || session('tarif_remunerasi_parent_filter') === null ? 'selected' : '' }}>Semua Kelompok Tarif</option>
+                  @foreach($list_paket as $paket)
+                  <option value="{{ $paket->tarif_id }}" {{ session('tarif_remunerasi_parent_filter') === $paket->tarif_id ? 'selected' : '' }}>
+                    {{ $paket->tarif_nm }} ({{ $paket->tarif_id }})
+                  </option>
+                  @endforeach
+                </select>
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-secondary px-3" id="btnResetFilter" title="Reset Pencarian" style="height: 38px;">
+                <i class="fas fa-undo me-1"></i>Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row g-3 mb-4">
       <div class="col-12 fade-up delay-2">
         <div class="card">
@@ -123,9 +137,8 @@
                   {{-- FITUR AKSI - Uncomment jika diperlukan
                   <th class="text-start" width="80">Aksi</th>
                   --}}
-                  <th class="text-start" width="100">ID</th>
-                  <th class="text-start" width="100">ID Tarif</th>
-                  <th class="text-start" width="250">Nama Tarif</th>
+                  <th class="text-start" width="120">ID Tarif</th>
+                  <th class="text-start" width="300">Nama Tarif</th>
                   <th class="text-start">Pelaku Status</th>
                   <th class="text-start">Nilai (Total)</th>
                   <th class="text-start">Jasa Sarana</th>

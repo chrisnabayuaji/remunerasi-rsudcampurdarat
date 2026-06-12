@@ -9,9 +9,14 @@ class TarifRemunerasiModel extends Model
 {
   protected $table = 'mst_tarif_remunerasi';
   protected $primaryKey = 'id';
-
   static function loadDatatables()
   {
+    $tarif_parent = session('tarif_remunerasi_parent_filter');
+    $filter_sql = "";
+    if ($tarif_parent !== null && $tarif_parent !== '') {
+      $filter_sql = " AND b.tarif_parent = " . \Illuminate\Support\Facades\DB::connection()->getPdo()->quote($tarif_parent);
+    }
+
     $query = "SELECT 
               x.*
             FROM (
@@ -23,6 +28,7 @@ class TarifRemunerasiModel extends Model
               LEFT JOIN mst_tarif b ON a.tarif_id = b.tarif_id
               WHERE
                 a.deleted_st = 0
+                {$filter_sql}
             ) x ";
     $search = ['tarif_id', 'tarif_nm', 'pelaku_st'];
     $where = [];

@@ -24,7 +24,19 @@ class TarifRemunerasi extends BaseController
       ->where('status', 'success')
       ->orderBy('synced_at', 'desc')
       ->first();
+    $d['list_paket'] = DB::table('mst_tarif')
+      ->where('tarif_tp', 'G')
+      ->where('deleted_st', 0)
+      ->orderBy('tarif_nm', 'asc')
+      ->get();
     return $this->renderView($this->template . 'index', $d);
+  }
+
+  function set_filter()
+  {
+    $tarif_tp = request()->get('tarif_tp');
+    session(['tarif_remunerasi_parent_filter' => $tarif_tp]);
+    return response()->json(['success' => true]);
   }
 
   function form_modal($id = null)
