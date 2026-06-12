@@ -22,6 +22,7 @@
             return meta.row + meta.settings._iDisplayStart + 1;
           }
         },
+        /* FITUR AKSI - Uncomment jika diperlukan
         {
           data: "pegawai_id",
           className: "align-middle text-start p-2",
@@ -43,6 +44,7 @@
             return html;
           }
         },
+        */
         {
           data: "nip",
           className: "align-middle text-start p-2"
