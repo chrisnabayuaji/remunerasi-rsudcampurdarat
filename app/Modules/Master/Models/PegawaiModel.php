@@ -9,11 +9,18 @@ class PegawaiModel
   public static function loadDatatables()
   {
     $query = "SELECT 
-                * 
+                x.*
               FROM (
-                SELECT * FROM mst_pegawai WHERE deleted_st = 0
+                SELECT 
+                  a.*,
+                  b.jabatan_nm,
+                  c.lokasi_nm AS unit_nm
+                FROM mst_pegawai a
+                LEFT JOIN mst_jabatan b ON a.jabatan_id = b.jabatan_id
+                LEFT JOIN mst_lokasi c ON a.lokasi_id = c.lokasi_id
+                WHERE a.deleted_st = 0
               ) x ";
-    $search = ['pegawai_nm', 'nip', 'nama_lengkap', 'jabatan_id', 'unit_id'];
+    $search = ['pegawai_nm', 'nip', 'nama_lengkap', 'jabatan_nm', 'unit_nm'];
     $where = [];
     $isWhere = null;
 
