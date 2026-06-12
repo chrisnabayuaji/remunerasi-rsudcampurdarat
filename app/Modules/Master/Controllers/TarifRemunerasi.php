@@ -146,12 +146,26 @@ class TarifRemunerasi extends BaseController
         $simrsIds[] = $record->id;
 
         $isCasemixTarif = ($record->tarif_id == '18.01' ||
-                           $record->tarif_id == '18.01.001' ||
-                           $record->tarif_id == '18.01.002');
+          $record->tarif_id == '18.01.001' ||
+          $record->tarif_id == '18.01.002');
+
+        $isCssdOfficeTarif = (
+          $record->tarif_id == '03.01.001' ||
+          $record->tarif_id == '03.02.001' ||
+          $record->tarif_id == '03.03.001' ||
+          $record->tarif_id == '03.04.001' ||
+          $record->tarif_id == '03.05.001' ||
+          $record->tarif_id == '03.06.001' ||
+          $record->tarif_id == '03.07.001' ||
+          $record->tarif_id == '03.08.001' ||
+          $record->tarif_id == '03.09.001'
+        );
 
         $dokterUtamaPerawat = $isCasemixTarif ? 0 : $record->dokter_utama_perawat;
         $casemix = $isCasemixTarif ? $record->dokter_utama_perawat : ($record->casemix ?? 0);
-        $kantor = $record->kantor ?? 0;
+
+        $cssdLaundry = $isCssdOfficeTarif ? 50 : ($record->cssd_laundry ?? 0);
+        $kantor = $isCssdOfficeTarif ? 50 : ($record->kantor ?? 0);
 
         $upsertData[] = [
           'created_at' => $record->created_at,
@@ -189,7 +203,7 @@ class TarifRemunerasi extends BaseController
           'tanpa_anestesi_perawat_ok' => $record->tanpa_anestesi_perawat_ok,
           'supir' => $record->supir,
           'rekam_medis' => $record->rekam_medis,
-          'cssd_laundry' => $record->cssd_laundry,
+          'cssd_laundry' => $cssdLaundry,
           'kantor' => $kantor,
           'casemix' => $casemix,
         ];
