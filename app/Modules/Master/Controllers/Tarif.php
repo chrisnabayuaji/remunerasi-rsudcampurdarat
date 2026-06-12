@@ -145,6 +145,7 @@ class Tarif extends BaseController
 
       foreach ($simrsData as $record) {
         $simrsIds[] = $record->tarif_id;
+        $tarifTp = ($record->tarif_id === '18.01') ? 'G' : $record->tarif_tp;
         $upsertData[] = [
           'created_at' => $record->created_at,
           'created_by' => $record->created_by,
@@ -161,7 +162,7 @@ class Tarif extends BaseController
           'akun_id' => $record->akun_id,
           'inacbg_id' => $record->inacbg_id,
           'tarif_nm' => $record->tarif_nm,
-          'tarif_tp' => $record->tarif_tp,
+          'tarif_tp' => $tarifTp,
           'tipetarif_id' => $record->tipetarif_id,
           'tarif_map' => $record->tarif_map,
           'order_list' => $record->order_list,

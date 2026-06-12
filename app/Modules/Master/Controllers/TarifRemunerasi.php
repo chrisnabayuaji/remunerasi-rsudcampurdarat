@@ -144,6 +144,15 @@ class TarifRemunerasi extends BaseController
 
       foreach ($simrsData as $record) {
         $simrsIds[] = $record->id;
+
+        $isCasemixTarif = ($record->tarif_id == '18.01' ||
+                           $record->tarif_id == '18.01.001' ||
+                           $record->tarif_id == '18.01.002');
+
+        $dokterUtamaPerawat = $isCasemixTarif ? 0 : $record->dokter_utama_perawat;
+        $casemix = $isCasemixTarif ? $record->dokter_utama_perawat : ($record->casemix ?? 0);
+        $kantor = $record->kantor ?? 0;
+
         $upsertData[] = [
           'created_at' => $record->created_at,
           'created_by' => $record->created_by,
@@ -170,7 +179,7 @@ class TarifRemunerasi extends BaseController
           'kabag_kasie' => $record->kabag_kasie,
           'post_rm' => $record->post_rm,
           'dokter_utama_dokter' => $record->dokter_utama_dokter,
-          'dokter_utama_perawat' => $record->dokter_utama_perawat,
+          'dokter_utama_perawat' => $dokterUtamaPerawat,
           'perawat_utama_dokter' => $record->perawat_utama_dokter,
           'perawat_utama_perawat' => $record->perawat_utama_perawat,
           'dengan_anestesi_dokter_operator' => $record->dengan_anestesi_dokter_operator,
@@ -181,6 +190,8 @@ class TarifRemunerasi extends BaseController
           'supir' => $record->supir,
           'rekam_medis' => $record->rekam_medis,
           'cssd_laundry' => $record->cssd_laundry,
+          'kantor' => $kantor,
+          'casemix' => $casemix,
         ];
       }
 
@@ -211,6 +222,8 @@ class TarifRemunerasi extends BaseController
         'supir',
         'rekam_medis',
         'cssd_laundry',
+        'kantor',
+        'casemix',
         'active_st',
         'deleted_st',
         'external_id',
