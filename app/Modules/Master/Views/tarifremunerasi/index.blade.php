@@ -1,3 +1,70 @@
+<style>
+  .table-responsive {
+    overflow-x: auto !important;
+    position: relative;
+  }
+
+  #datatable-main {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: max-content !important;
+    min-width: 100%;
+  }
+
+  #datatable-main th:nth-child(1),
+  #datatable-main td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    background-color: #fff !important;
+    z-index: 5;
+    box-shadow: inset -1px 0 0 #dee2e6;
+  }
+
+  #datatable-main th:nth-child(2),
+  #datatable-main td:nth-child(2) {
+    position: sticky;
+    left: 70px;
+    background-color: #fff !important;
+    z-index: 5;
+    box-shadow: inset -1px 0 0 #dee2e6;
+  }
+
+  #datatable-main th:nth-child(3),
+  #datatable-main td:nth-child(3) {
+    position: sticky;
+    left: 170px;
+    background-color: #fff !important;
+    z-index: 5;
+    box-shadow: inset -1px 0 0 #dee2e6;
+  }
+
+  #datatable-main th:nth-child(4),
+  #datatable-main td:nth-child(4) {
+    position: sticky;
+    left: 270px;
+    background-color: #fff !important;
+    z-index: 5;
+    box-shadow: inset -2px 0 0 #adb5bd; /* Stronger border at the freeze boundary */
+  }
+
+  /* Make sure header stays on top */
+  #datatable-main th:nth-child(1),
+  #datatable-main th:nth-child(2),
+  #datatable-main th:nth-child(3),
+  #datatable-main th:nth-child(4) {
+    z-index: 6;
+    background-color: #f8f9fa !important;
+  }
+
+  /* Ensure hover effect stays consistent */
+  #datatable-main tr:hover td:nth-child(1),
+  #datatable-main tr:hover td:nth-child(2),
+  #datatable-main tr:hover td:nth-child(3),
+  #datatable-main tr:hover td:nth-child(4) {
+    background-color: #eceff1 !important;
+  }
+</style>
+
 <main id="main">
   <div class="page-content">
     <div class="d-flex align-items-center justify-content-between mb-3">
@@ -57,9 +124,9 @@
                     {{-- FITUR AKSI - Uncomment jika diperlukan
                     <th class="text-start" width="80">Aksi</th>
                     --}}
-                    <th class="text-start">ID</th>
-                    <th class="text-start">ID Tarif</th>
-                    <th class="text-start">Nama Tarif</th>
+                    <th class="text-start" width="100">ID</th>
+                    <th class="text-start" width="100">ID Tarif</th>
+                    <th class="text-start" width="250">Nama Tarif</th>
                     <th class="text-start">Pelaku Status</th>
                     <th class="text-start">Nilai (Total)</th>
                     <th class="text-start">Jasa Sarana</th>
