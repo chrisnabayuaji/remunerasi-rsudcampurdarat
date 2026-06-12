@@ -16,7 +16,8 @@ class TarifRemunerasiModel extends Model
     $tarif_parent = $sess['tarif_tp'] ?? '';
     $filter_sql = "";
     if ($tarif_parent !== null && $tarif_parent !== '') {
-      $filter_sql .= " AND b.tarif_parent = " . \Illuminate\Support\Facades\DB::connection()->getPdo()->quote($tarif_parent);
+      $escaped_parent = \Illuminate\Support\Facades\DB::connection()->getPdo()->quote($tarif_parent . '%');
+      $filter_sql .= " AND a.tarif_id LIKE {$escaped_parent}";
     }
 
     $search_filter = $sess['search'] ?? '';
