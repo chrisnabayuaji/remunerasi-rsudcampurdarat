@@ -58,7 +58,7 @@
                   @endforeach
                 </select>
               </div>
-              <button type="button" class="btn btn-sm btn-outline-secondary px-3" id="btnResetFilter" title="Reset Pencarian" style="height: 38px;">
+              <button type="button" class="btn btn-outline-secondary px-3" id="btnResetFilter" title="Reset Pencarian" style="height: 38px;">
                 <i class="fas fa-undo me-1"></i>Reset
               </button>
             </div>
