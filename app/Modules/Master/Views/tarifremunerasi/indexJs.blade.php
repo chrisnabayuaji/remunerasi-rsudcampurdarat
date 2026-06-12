@@ -249,14 +249,26 @@
     // Tombol Sinkronisasi
     $('#btnSync').click(function() {
       Swal.fire({
-        title: 'Sinkronisasi Data',
-        text: 'Apakah Anda yakin ingin melakukan sinkronisasi data tarif remunerasi dari SIMRS?',
-        icon: 'question',
+        title: 'Verifikasi Password',
+        text: 'Masukkan password login Anda untuk melakukan sinkronisasi data tarif remunerasi dari SIMRS:',
+        input: 'password',
+        inputPlaceholder: 'Password login Anda...',
+        inputAttributes: {
+          autocapitalize: 'off',
+          autocorrect: 'off'
+        },
         showCancelButton: true,
-        confirmButtonText: 'Ya, Sinkronkan',
-        cancelButtonText: 'Batal'
+        confirmButtonText: 'Verifikasi & Sinkronkan',
+        cancelButtonText: 'Batal',
+        inputValidator: (value) => {
+          if (!value) {
+            return 'Password wajib diisi!'
+          }
+        }
       }).then((result) => {
         if (result.isConfirmed) {
+          var password = result.value;
+
           Swal.fire({
             title: 'Sedang Memproses...',
             text: 'Sinkronisasi data tarif remunerasi sedang berjalan, mohon tunggu...',
@@ -270,7 +282,8 @@
             url: '{{ url($nav_url . "/sync") }}?n={{ $nav_id }}',
             type: 'POST',
             data: {
-              _token: '{{ csrf_token() }}'
+              _token: '{{ csrf_token() }}',
+              password: password
             },
             success: function(response) {
               Swal.close();

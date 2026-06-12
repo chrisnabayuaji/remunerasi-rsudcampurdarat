@@ -112,6 +112,22 @@ class Tarif extends BaseController
 
   function sync()
   {
+    $password = request()->post('password');
+    if (empty($password)) {
+      return response()->json([
+        'success' => false,
+        'message' => 'Password wajib diisi untuk melakukan sinkronisasi!'
+      ], 400);
+    }
+
+    $currentUser = DB::table('app_user')->where('user_id', session('user_id'))->first();
+    if (!$currentUser || !password_verify($password, $currentUser->user_hash)) {
+      return response()->json([
+        'success' => false,
+        'message' => 'Password salah!'
+      ], 403);
+    }
+
     set_time_limit(300); // 5 minutes timeout
 
     DB::beginTransaction();
