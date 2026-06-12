@@ -57,6 +57,7 @@
           data: "tarif_nm",
           className: "align-middle text-start p-2"
         },
+        /* inacbg_id and kelompokkelas_id columns commented out as requested
         {
           data: "inacbg_id",
           className: "align-middle text-start p-2"
@@ -65,11 +66,19 @@
           data: "kelompokkelas_id",
           className: "align-middle text-start p-2"
         },
+        */
         {
           data: "unit_cost",
           className: "align-middle text-end p-2",
           render: function(data) {
-            return data ? formatRupiah(data) : 'Rp 0';
+            return data && parseFloat(data) > 0 ? formatRupiah(data) : '-';
+          }
+        },
+        {
+          data: "nominal",
+          className: "align-middle text-end p-2",
+          render: function(data) {
+            return data && parseFloat(data) > 0 ? formatRupiah(data) : '-';
           }
         },
         {

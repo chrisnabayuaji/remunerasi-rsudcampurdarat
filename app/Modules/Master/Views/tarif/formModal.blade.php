@@ -27,6 +27,10 @@
         <input type="number" step="0.01" class="form-control" name="unit_cost" value="{{ $main['unit_cost'] ?? 0 }}">
       </div>
       <div class="col-md-6">
+        <label class="form-label">Nominal Tarif Tertinggi (Rp)</label>
+        <input type="number" step="0.01" class="form-control" name="nominal" value="{{ $main['nominal'] ?? 0 }}">
+      </div>
+      <div class="col-md-6">
         <label class="form-label">Status Aktif</label>
         <select class="form-select" name="active_st">
           <option value="1" {{ ($main['active_st'] ?? 1) == 1 ? 'selected' : '' }}>Aktif</option>

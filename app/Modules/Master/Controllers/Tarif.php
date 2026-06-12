@@ -113,8 +113,12 @@ class Tarif extends BaseController
     try {
       $startTime = microtime(true);
 
-      // Get all data from SIMRS (including deleted)
-      $simrsData = DB::connection('simrs')->table('mst_tarif')->get();
+      // Get all data from SIMRS (including deleted) with max nominal from tk (tarif_kelas detail)
+      $simrsData = DB::connection('simrs')
+        ->table('mst_tarif as t')
+        ->select('t.*')
+        ->selectRaw('(SELECT MAX(tk.nominal) FROM mst_tarif_kelas tk WHERE tk.tarif_id = t.tarif_id AND tk.deleted_st = 0) as nominal')
+        ->get();
 
       if ($simrsData->isEmpty()) {
         DB::rollBack();
@@ -173,6 +177,7 @@ class Tarif extends BaseController
           'parent_cd' => $record->parent_cd,
           'tarif_cd' => $record->tarif_cd,
           'loinc_reference' => $record->loinc_reference,
+          'nominal' => $record->nominal ?? 0,
         ];
       }
 
@@ -183,7 +188,8 @@ class Tarif extends BaseController
         'loinc_id', 'loinc_desc', 'tarifsatuan_id', 'score', 'bhp_st', 'tipesampel_id', 
         'tipesampel_cd', 'sktarif_id', 'modality_id', 'unit_cost', 'kelompokkelas_id', 
         'parent_cd', 'tarif_cd', 'loinc_reference', 'active_st', 'deleted_st', 'external_id',
-        'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by'
+        'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by',
+        'nominal'
       ];
 
       foreach (array_chunk($upsertData, 500) as $chunk) {

@@ -60,9 +60,12 @@
                     <th class="text-start">ID Tarif</th>
                     <th class="text-start">Kode Tarif</th>
                     <th class="text-start">Nama Tarif</th>
+                    {{-- Hidden columns as requested
                     <th class="text-start">Inacbg ID</th>
                     <th class="text-start">Kelompok Kelas ID</th>
+                    --}}
                     <th class="text-start">Unit Cost</th>
+                    <th class="text-start">Nominal (SIMRS)</th>
                     <th class="text-center" width="80">Aktif</th>
                   </tr>
                 </thead>

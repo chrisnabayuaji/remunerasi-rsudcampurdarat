@@ -22,6 +22,7 @@ class TarifModel extends Model
               FROM mst_tarif a
               WHERE
                 a.deleted_st = 0
+                AND a.tarif_tp = 'G'
             ) x ";
     $search = ['tarif_id', 'tarif_nm', 'inacbg_id', 'tarif_cd'];
     $where = [];

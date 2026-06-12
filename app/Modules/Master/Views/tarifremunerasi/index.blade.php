@@ -50,7 +50,7 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table id="datatable-main" class="table table-hover table-striped align-middle w-100" style="font-size:13px">
+              <table id="datatable-main" class="table table-hover table-striped align-middle w-100" style="font-size:12px; white-space: nowrap;">
                 <thead>
                   <tr>
                     <th class="text-center" width="70">No</th>
@@ -64,6 +64,24 @@
                     <th class="text-start">Nilai (Total)</th>
                     <th class="text-start">Jasa Sarana</th>
                     <th class="text-start">Jasa Layanan</th>
+                    <th class="text-start">Cost Center</th>
+                    <th class="text-start">Revenue Center</th>
+                    <th class="text-start">Direksi</th>
+                    <th class="text-start">Direktur</th>
+                    <th class="text-start">Kabag/Kasie</th>
+                    <th class="text-start">Post RM</th>
+                    <th class="text-start">Dr Utama (Dr)</th>
+                    <th class="text-start">Dr Utama (Prw)</th>
+                    <th class="text-start">Prw Utama (Dr)</th>
+                    <th class="text-start">Prw Utama (Prw)</th>
+                    <th class="text-start">Dg Anest: Dr Op</th>
+                    <th class="text-start">Dg Anest: Dr An</th>
+                    <th class="text-start">Dg Anest: Prw</th>
+                    <th class="text-start">Tpa Anest: Dr Op</th>
+                    <th class="text-start">Tpa Anest: Prw</th>
+                    <th class="text-start">Supir</th>
+                    <th class="text-start">Rekam Medis</th>
+                    <th class="text-start">CSSD Laundry</th>
                     <th class="text-center" width="80">Aktif</th>
                   </tr>
                 </thead>
