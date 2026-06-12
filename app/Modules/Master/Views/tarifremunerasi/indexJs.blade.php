@@ -10,6 +10,34 @@
     return pctStr + '<br><small class="text-muted">-</small>';
   }
 
+  function renderJasaLayananSubPct(data, type, row) {
+    if (row.tarif_tp === 'G') return '-';
+    var pctStr = data ? data + ' %' : '0 %';
+    var base = parseFloat(row.nominal || 0) - parseFloat(row.unit_cost || 0);
+    var jasaLayananPct = parseFloat(row.jasa_layanan || 0);
+    var jasaLayananNominal = (jasaLayananPct / 100) * base;
+    if (jasaLayananNominal > 0 && parseFloat(data) > 0) {
+      var nominalShare = (parseFloat(data) / 100) * jasaLayananNominal;
+      return pctStr + '<br><small class="text-muted">' + formatRupiah(nominalShare) + '</small>';
+    }
+    return pctStr + '<br><small class="text-muted">-</small>';
+  }
+
+  function renderRevenueCenterSubPct(data, type, row) {
+    if (row.tarif_tp === 'G') return '-';
+    var pctStr = data ? data + ' %' : '0 %';
+    var base = parseFloat(row.nominal || 0) - parseFloat(row.unit_cost || 0);
+    var jasaLayananPct = parseFloat(row.jasa_layanan || 0);
+    var jasaLayananNominal = (jasaLayananPct / 100) * base;
+    var revenueCenterPct = parseFloat(row.revenue_center || 0);
+    var revenueCenterNominal = (revenueCenterPct / 100) * jasaLayananNominal;
+    if (revenueCenterNominal > 0 && parseFloat(data) > 0) {
+      var nominalShare = (parseFloat(data) / 100) * revenueCenterNominal;
+      return pctStr + '<br><small class="text-muted">' + formatRupiah(nominalShare) + '</small>';
+    }
+    return pctStr + '<br><small class="text-muted">-</small>';
+  }
+
   $(document).ready(function() {
     var table = $('#datatable-main').DataTable({
       language: {
@@ -103,92 +131,92 @@
         {
           data: "cost_center",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderJasaLayananSubPct
         },
         {
           data: "revenue_center",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderJasaLayananSubPct
         },
         {
           data: "direksi",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderJasaLayananSubPct
         },
         {
           data: "direktur",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderJasaLayananSubPct
         },
         {
           data: "kabag_kasie",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderJasaLayananSubPct
         },
         {
           data: "post_rm",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderJasaLayananSubPct
         },
         {
           data: "dokter_utama_dokter",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "dokter_utama_perawat",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "perawat_utama_dokter",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "perawat_utama_perawat",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "dengan_anestesi_dokter_operator",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "dengan_anestesi_dokter_anestesi",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "dengan_anestesi_perawat_ok",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "tanpa_anestesi_dokter_operator",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "tanpa_anestesi_perawat_ok",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "supir",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "rekam_medis",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "cssd_laundry",
           className: "align-middle text-end p-2",
-          render: renderPctNominal
+          render: renderRevenueCenterSubPct
         },
         {
           data: "active_st",

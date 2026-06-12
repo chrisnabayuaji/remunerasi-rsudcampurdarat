@@ -178,3 +178,39 @@ Berikut adalah pembagian jadwal kerja taktis berdurasi 1.5 bulan (6 minggu) menu
   * User Acceptance Testing (UAT) bersama jajaran Direksi, Komite Medis, dan Keuangan RSUD Campurdarat.
   * Deployment ke server produksi rumah sakit.
 * **Target Output**: Sistem remunerasi aktif 100% (Go-Live).
+
+---
+
+## 7. Aturan Bisnis Khusus & Formula Perhitungan Jasa Remunerasi
+
+### 7.1 Filter Kelompok Tarif (Tipe Tarif G)
+* **Sumber Opsi Dropdown**: Opsi dropdown penyaringan ("Kelompok Tarif") dimuat secara dinamis dari tabel `mst_tarif` yang memiliki `tarif_tp = 'G'` (Package/Header).
+* **Fungsi Penyaringan**:
+  * Jika parameter filter kosong ("Semua Kelompok Tarif"), sistem menampilkan seluruh baris tarif.
+  * Jika parameter filter diisi dengan ID kelompok tarif, sistem menyaring dan hanya menampilkan baris detail yang memiliki `tarif_parent` sama dengan ID kelompok tarif terpilih.
+  * Dilengkapi tombol **Reset** untuk mengembalikan dropdown ke opsi "Semua Kelompok Tarif" dan memuat ulang data asli.
+
+### 7.2 Kondisi Tipe Tarif Paket (Tipe 'G')
+* Pada halaman **Tarif Remunerasi**, baris data tarif yang merupakan tipe paket (`tarif_tp = 'G'`) tidak menampilkan persentase split maupun nominal rupiah hasil perkalian (ditampilkan sebagai `-` pada kolom-kolom persentase).
+
+### 7.3 Hierarki Perhitungan Nilai Nominal Jasa
+Perhitungan nominal rupiah bagi-hasil jasa remunerasi dilakukan secara berjenjang (bertingkat) mengikuti rumus berikut:
+
+1. **Nominal Bersih Jasa (Net Base)**:
+   $$\text{Net Base} = \text{nominal} - \text{unit\_cost}$$
+   *Nilai ini ditampilkan pada kolom khusus "Tarif - Unit Cost".*
+2. **Jasa Layanan (Jasa Pelayanan)**:
+   $$\text{Nominal Jasa Layanan} = \frac{\text{jasa\_layanan\_pct}}{100} \times \text{Net Base}$$
+3. **Sub-Komponen Berbasis Jasa Layanan**:
+   Komponen-komponen berikut dihitung menggunakan **Nominal Jasa Layanan** sebagai basis perkaliannya (bukan Net Base):
+   * **Cost Center**: $\frac{\text{cost\_center\_pct}}{100} \times \text{Nominal Jasa Layanan}$
+   * **Revenue Center**: $\frac{\text{revenue\_center\_pct}}{100} \times \text{Nominal Jasa Layanan}$
+   * **Direksi**: $\frac{\text{direksi\_pct}}{100} \times \text{Nominal Jasa Layanan}$
+   * **Direktur**: $\frac{\text{direktur\_pct}}{100} \times \text{Nominal Jasa Layanan}$
+   * **Kabag/Kasie**: $\frac{\text{kabag\_kasie\_pct}}{100} \times \text{Nominal Jasa Layanan}$
+   * **Post RM**: $\frac{\text{post\_rm\_pct}}{100} \times \text{Nominal Jasa Layanan}$
+4. **Sub-Komponen Berbasis Revenue Center**:
+   Semua komponen medis/pelaksana dari **Dokter Utama ke belakang** dihitung menggunakan **Nominal Revenue Center** sebagai basis perkaliannya:
+   * **Dokter/Perawat Pelaksana**: $\frac{\text{komponen\_pct}}{100} \times \text{Nominal Revenue Center}$
+   * *Berlaku untuk kolom: Dokter Utama (Dr/Prw), Perawat Utama (Dr/Prw), Dengan Anestesi (Dr Op/Dr An/Prw), Tanpa Anestesi (Dr Op/Prw), Supir, Rekam Medis, dan CSSD Laundry.*
+
