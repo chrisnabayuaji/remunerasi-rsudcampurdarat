@@ -44,6 +44,7 @@
         url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json',
         paginate: paginate
       },
+      searching: false,
       processing: true,
       serverSide: true,
       ajax: {
@@ -313,9 +314,49 @@
       });
     });
 
+    // Handle Manual Search submission
+    function performSearch() {
+      var searchVal = $('#search_keyword').val();
+      $.ajax({
+        url: "{{ url($nav_url . '/set_filter') }}?n={{ $nav_id }}",
+        type: "POST",
+        data: {
+          _token: "{{ csrf_token() }}",
+          search: searchVal
+        },
+        success: function(response) {
+          if (response.success) {
+            table.ajax.reload();
+          }
+        }
+      });
+    }
+
+    $('#btnSearchSubmit').click(function() {
+      performSearch();
+    });
+
+    $('#search_keyword').keypress(function(e) {
+      if (e.which == 13) {
+        performSearch();
+        e.preventDefault();
+      }
+    });
+
     // Handle Reset Filter Click
     $('#btnResetFilter').click(function() {
-      $('#filter_tarif_tp').val('').trigger('change');
+      $('#search_keyword').val('');
+      $.ajax({
+        url: "{{ url($nav_url . '/set_filter') }}?n={{ $nav_id }}",
+        type: "POST",
+        data: {
+          _token: "{{ csrf_token() }}",
+          search: ""
+        },
+        success: function() {
+          $('#filter_tarif_tp').val('').trigger('change');
+        }
+      });
     });
   });
 </script>

@@ -27,17 +27,11 @@ class TarifRemunerasi extends BaseController
     $d['list_paket'] = DB::table('mst_tarif')
       ->where('tarif_tp', 'G')
       ->where('deleted_st', 0)
-      ->orderBy('tarif_nm', 'asc')
+      ->orderBy('tarif_id', 'asc')
       ->get();
     return $this->renderView($this->template . 'index', $d);
   }
 
-  function set_filter()
-  {
-    $tarif_tp = request()->get('tarif_tp');
-    session(['tarif_remunerasi_parent_filter' => $tarif_tp]);
-    return response()->json(['success' => true]);
-  }
 
   function form_modal($id = null)
   {
@@ -191,14 +185,41 @@ class TarifRemunerasi extends BaseController
       }
 
       $updateColumns = [
-        'tarif_id', 'kelompokkelas_id', 'alokasi_insentif_id', 'kelompok_id', 'pelaku_st',
-        'nilai', 'jasa_sarana', 'jasa_layanan', 'cost_center', 'revenue_center', 'direksi',
-        'direktur', 'kabag_kasie', 'post_rm', 'dokter_utama_dokter', 'dokter_utama_perawat',
-        'perawat_utama_dokter', 'perawat_utama_perawat', 'dengan_anestesi_dokter_operator',
-        'dengan_anestesi_dokter_anestesi', 'dengan_anestesi_perawat_ok',
-        'tanpa_anestesi_dokter_operator', 'tanpa_anestesi_perawat_ok', 'supir',
-        'rekam_medis', 'cssd_laundry', 'active_st', 'deleted_st', 'external_id',
-        'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by'
+        'tarif_id',
+        'kelompokkelas_id',
+        'alokasi_insentif_id',
+        'kelompok_id',
+        'pelaku_st',
+        'nilai',
+        'jasa_sarana',
+        'jasa_layanan',
+        'cost_center',
+        'revenue_center',
+        'direksi',
+        'direktur',
+        'kabag_kasie',
+        'post_rm',
+        'dokter_utama_dokter',
+        'dokter_utama_perawat',
+        'perawat_utama_dokter',
+        'perawat_utama_perawat',
+        'dengan_anestesi_dokter_operator',
+        'dengan_anestesi_dokter_anestesi',
+        'dengan_anestesi_perawat_ok',
+        'tanpa_anestesi_dokter_operator',
+        'tanpa_anestesi_perawat_ok',
+        'supir',
+        'rekam_medis',
+        'cssd_laundry',
+        'active_st',
+        'deleted_st',
+        'external_id',
+        'created_at',
+        'created_by',
+        'updated_at',
+        'updated_by',
+        'deleted_at',
+        'deleted_by'
       ];
 
       foreach (array_chunk($upsertData, 500) as $chunk) {
@@ -213,7 +234,7 @@ class TarifRemunerasi extends BaseController
       if (count($simrsIds) < 1000) {
         $orphanedDataQuery->whereNotIn('id', $simrsIds);
       } else {
-        $orphanedDataQuery->where(function($query) use ($simrsIds) {
+        $orphanedDataQuery->where(function ($query) use ($simrsIds) {
           $chunks = array_chunk($simrsIds, 1000);
           foreach ($chunks as $chunk) {
             $query->whereNotIn('id', $chunk);

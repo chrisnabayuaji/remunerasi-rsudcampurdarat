@@ -11,10 +11,18 @@ class TarifRemunerasiModel extends Model
   protected $primaryKey = 'id';
   static function loadDatatables()
   {
-    $tarif_parent = session('tarif_remunerasi_parent_filter');
+    $nav_id = request()->query('n');
+    $sess = session($nav_id);
+    $tarif_parent = $sess['tarif_tp'] ?? '';
     $filter_sql = "";
     if ($tarif_parent !== null && $tarif_parent !== '') {
-      $filter_sql = " AND b.tarif_parent = " . \Illuminate\Support\Facades\DB::connection()->getPdo()->quote($tarif_parent);
+      $filter_sql .= " AND b.tarif_parent = " . \Illuminate\Support\Facades\DB::connection()->getPdo()->quote($tarif_parent);
+    }
+
+    $search_filter = $sess['search'] ?? '';
+    if ($search_filter !== null && $search_filter !== '') {
+      $escaped_search = \Illuminate\Support\Facades\DB::connection()->getPdo()->quote('%' . strtolower($search_filter) . '%');
+      $filter_sql .= " AND (LOWER(a.tarif_id) LIKE {$escaped_search} OR LOWER(b.tarif_nm) LIKE {$escaped_search} OR LOWER(b.tarif_cd) LIKE {$escaped_search})";
     }
 
     $query = "SELECT 

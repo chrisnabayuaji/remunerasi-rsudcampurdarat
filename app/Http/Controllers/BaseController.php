@@ -57,4 +57,23 @@ class BaseController extends Controller
       return View('app::template.index', $data);
     }
   }
+
+  function set_filter()
+  {
+    $params = request()->all();
+    unset($params['_token']);
+    unset($params['n']);
+
+    $sess = session($this->nav_id);
+    if (!is_array($sess)) {
+      $sess = [];
+    }
+
+    foreach ($params as $key => $val) {
+      $sess[$key] = $val;
+    }
+
+    session([$this->nav_id => $sess]);
+    return response()->json(['success' => true]);
+  }
 }
