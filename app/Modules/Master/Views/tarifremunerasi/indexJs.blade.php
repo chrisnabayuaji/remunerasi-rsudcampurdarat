@@ -219,6 +219,16 @@
           render: renderRevenueCenterSubPct
         },
         {
+          data: "kantor",
+          className: "align-middle text-end p-2",
+          render: renderRevenueCenterSubPct
+        },
+        {
+          data: "casemix",
+          className: "align-middle text-end p-2",
+          render: renderRevenueCenterSubPct
+        },
+        {
           data: "active_st",
           className: "align-middle text-center p-2",
           sortable: false,

@@ -162,6 +162,8 @@
                   <th class="text-start">Supir</th>
                   <th class="text-start">Rekam Medis</th>
                   <th class="text-start">CSSD Laundry</th>
+                  <th class="text-start">Kantor</th>
+                  <th class="text-start">Casemix</th>
                   <th class="text-center" width="80">Aktif</th>
                 </tr>
               </thead>

@@ -147,6 +147,14 @@
         <label class="form-label">CSSD & Laundry (Rp)</label>
         <input type="number" step="0.01" class="form-control" name="cssd_laundry" value="{{ $main['cssd_laundry'] ?? 0 }}">
       </div>
+      <div class="col-md-6">
+        <label class="form-label">Kantor (Rp)</label>
+        <input type="number" step="0.01" class="form-control" name="kantor" value="{{ $main['kantor'] ?? 0 }}">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Casemix (Rp)</label>
+        <input type="number" step="0.01" class="form-control" name="casemix" value="{{ $main['casemix'] ?? 0 }}">
+      </div>
     </div>
   </div>
   <div class="modal-footer">
