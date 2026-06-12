@@ -22,6 +22,29 @@
             return meta.row + meta.settings._iDisplayStart + 1;
           }
         },
+        /* FITUR AKSI - Uncomment jika diperlukan
+        {
+          data: "id",
+          className: "align-middle text-start p-2",
+          sortable: false,
+          render: function(data, type, row, meta) {
+            var url_edit = '{{ $nav_url }}/form_modal/' + data + '?n={{ $nav_id }}';
+            var url_delete = '{{ $nav_url }}/delete/' + data + '/' + _token + '?n={{ $nav_id }}';
+
+            var html = '<div class="btn-group">' +
+              '  <button type="button" class="btn btn-xs btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-boundary="viewport">' +
+              '    Aksi' +
+              '  </button>' +
+              '  <ul class="dropdown-menu dropdown-sm shadow-lg border-0">' +
+              '    <li><a class="dropdown-item py-2" href="javascript:void(0)" onclick="fsModalShow(event, {url: \'' + url_edit + '\', title: \'Ubah Data Tarif Remunerasi\'})"><i class="fas fa-edit me-2"></i>Ubah Data</a></li>' +
+              '    <li><a class="dropdown-item py-2 text-danger" href="javascript:void(0)" onclick="fsDeleteConfirm(event, {url: \'' + url_delete + '\'})"><i class="fas fa-trash-alt me-2"></i>Hapus Data</a></li>' +
+              '  </ul>' +
+              '</div>';
+
+            return html;
+          }
+        },
+        */
         {
           data: "id",
           className: "align-middle text-start p-2"

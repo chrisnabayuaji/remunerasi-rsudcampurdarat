@@ -33,6 +33,14 @@ class Pegawai extends BaseController
     if ($d['main']) {
       $d['main'] = json_decode(json_encode($d['main']), true);
     }
+    
+    // Master data for dropdowns
+    $d['agama_list'] = DB::table('mst_agama')->where('deleted_st', 0)->where('active_st', 1)->orderBy('agama_nm')->get();
+    $d['pernikahan_list'] = DB::table('mst_pernikahan')->where('deleted_st', 0)->where('active_st', 1)->orderBy('pernikahan_nm')->get();
+    $d['statuspegawai_list'] = DB::table('mst_status_pegawai')->where('deleted_st', 0)->where('active_st', 1)->orderBy('statuspegawai_nm')->get();
+    $d['jabatan_list'] = DB::table('mst_jabatan')->where('deleted_st', 0)->where('active_st', 1)->orderBy('jabatan_nm')->get();
+    $d['lokasi_list'] = DB::table('mst_lokasi')->where('deleted_st', 0)->where('active_st', 1)->orderBy('lokasi_nm')->get();
+
     $d['form_act'] = $this->nav_url . '/save' . ($id ? '/' . $id : '') . '?n=' . $this->nav_id;
     return $this->renderView($this->template . 'formModal', $d);
   }
