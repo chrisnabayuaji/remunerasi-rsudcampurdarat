@@ -35,7 +35,8 @@
     left: 190px;
     background-color: #fff !important;
     z-index: 5;
-    box-shadow: inset -2px 0 0 #adb5bd; /* Stronger border at the freeze boundary */
+    box-shadow: inset -2px 0 0 #adb5bd;
+    /* Stronger border at the freeze boundary */
   }
 
   /* Make sure header stays on top */
@@ -67,7 +68,7 @@
         </button>
         {{-- FITUR TAMBAH DATA - Uncomment jika diperlukan
         <button type="button" class="btn btn-primary rounded-3 px-4 shadow-sm" onclick="fsModalShow(event, {url: '{{ $nav_url }}/form_modal?n={{ $nav_id }}', title: 'Tambah Tarif Remunerasi Baru'})">
-          <i class="fas fa-plus me-2"></i>Tambah Data
+        <i class="fas fa-plus me-2"></i>Tambah Data
         </button>
         --}}
       </div>
@@ -91,10 +92,10 @@
       <i class="fas fa-info-circle me-2"></i>
       <strong>Informasi Sinkronisasi:</strong>
       @if($last_sync)
-        Terakhir sinkronisasi: {{ \Carbon\Carbon::parse($last_sync->synced_at)->format('d M Y H:i:s') }}
-        ({{ $last_sync->records_synced }} data)
+      Terakhir sinkronisasi: {{ \Carbon\Carbon::parse($last_sync->synced_at)->format('d M Y H:i:s') }}
+      ({{ $last_sync->records_synced }} data)
       @else
-        Belum pernah dilakukan sinkronisasi
+      Belum pernah dilakukan sinkronisasi
       @endif
     </div>
 
@@ -115,9 +116,7 @@
                     @endforeach
                   </select>
                 </div>
-                <button type="button" class="btn btn-sm btn-outline-secondary px-3" id="btnResetFilter" title="Reset Pencarian" style="height: 38px;">
-                  <i class="fas fa-undo me-1"></i>Reset
-                </button>
+
               </div>
             </div>
 
@@ -125,10 +124,16 @@
               <label class="form-label mb-1" style="font-weight: 600; font-size: 13px;"><i class="fas fa-search text-primary me-1"></i> Cari Secara Manual</label>
               <div class="d-flex gap-2 align-items-center">
                 <input type="text" class="form-control form-control-sm" id="search_keyword" value="{{ $nav_sess['search'] ?? '' }}" placeholder="Cari Kode / Nama / ID..." style="height: 38px;">
-                <button type="button" class="btn btn-sm btn-primary px-3" id="btnSearchSubmit" title="Cari Data" style="height: 38px;">
-                  <i class="fas fa-search me-1"></i>Cari
-                </button>
               </div>
+            </div>
+
+            <div class="col-auto d-flex align-items-end">
+              <button type="button" class="btn btn-primary px-3 me-2" id="btnSearchSubmit" title="Cari Data" style="height: 38px;">
+                <i class="fas fa-search me-1"></i>Cari
+              </button>
+              <button type="button" class="btn btn-outline-secondary px-3" id="btnResetFilter" title="Reset Pencarian" style="height: 38px;">
+                <i class="fas fa-undo me-1"></i>Reset
+              </button>
             </div>
           </div>
         </div>
