@@ -1,5 +1,5 @@
 <style>
-  .table-responsive {
+  .dt-layout-table {
     overflow-x: auto !important;
     position: relative;
   }
@@ -116,45 +116,43 @@
             <h6 class="card-title"><i class="fas fa-list text-primary me-2"></i> List {{ $menu_title }}</h6>
           </div>
           <div class="card-body">
-            <div class="table-responsive">
-              <table id="datatable-main" class="table table-hover table-striped align-middle w-100" style="font-size:12px; white-space: nowrap;">
-                <thead>
-                  <tr>
-                    <th class="text-center" width="70">No</th>
-                    {{-- FITUR AKSI - Uncomment jika diperlukan
-                    <th class="text-start" width="80">Aksi</th>
-                    --}}
-                    <th class="text-start" width="100">ID</th>
-                    <th class="text-start" width="100">ID Tarif</th>
-                    <th class="text-start" width="250">Nama Tarif</th>
-                    <th class="text-start">Pelaku Status</th>
-                    <th class="text-start">Nilai (Total)</th>
-                    <th class="text-start">Jasa Sarana</th>
-                    <th class="text-start">Jasa Layanan</th>
-                    <th class="text-start">Cost Center</th>
-                    <th class="text-start">Revenue Center</th>
-                    <th class="text-start">Direksi</th>
-                    <th class="text-start">Direktur</th>
-                    <th class="text-start">Kabag/Kasie</th>
-                    <th class="text-start">Post RM</th>
-                    <th class="text-start">Dr Utama (Dr)</th>
-                    <th class="text-start">Dr Utama (Prw)</th>
-                    <th class="text-start">Prw Utama (Dr)</th>
-                    <th class="text-start">Prw Utama (Prw)</th>
-                    <th class="text-start">Dg Anest: Dr Op</th>
-                    <th class="text-start">Dg Anest: Dr An</th>
-                    <th class="text-start">Dg Anest: Prw</th>
-                    <th class="text-start">Tpa Anest: Dr Op</th>
-                    <th class="text-start">Tpa Anest: Prw</th>
-                    <th class="text-start">Supir</th>
-                    <th class="text-start">Rekam Medis</th>
-                    <th class="text-start">CSSD Laundry</th>
-                    <th class="text-center" width="80">Aktif</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
+            <table id="datatable-main" class="table table-hover table-striped align-middle w-100" style="font-size:12px; white-space: nowrap;">
+              <thead>
+                <tr>
+                  <th class="text-center" width="70">No</th>
+                  {{-- FITUR AKSI - Uncomment jika diperlukan
+                  <th class="text-start" width="80">Aksi</th>
+                  --}}
+                  <th class="text-start" width="100">ID</th>
+                  <th class="text-start" width="100">ID Tarif</th>
+                  <th class="text-start" width="250">Nama Tarif</th>
+                  <th class="text-start">Pelaku Status</th>
+                  <th class="text-start">Nilai (Total)</th>
+                  <th class="text-start">Jasa Sarana</th>
+                  <th class="text-start">Jasa Layanan</th>
+                  <th class="text-start">Cost Center</th>
+                  <th class="text-start">Revenue Center</th>
+                  <th class="text-start">Direksi</th>
+                  <th class="text-start">Direktur</th>
+                  <th class="text-start">Kabag/Kasie</th>
+                  <th class="text-start">Post RM</th>
+                  <th class="text-start">Dr Utama (Dr)</th>
+                  <th class="text-start">Dr Utama (Prw)</th>
+                  <th class="text-start">Prw Utama (Dr)</th>
+                  <th class="text-start">Prw Utama (Prw)</th>
+                  <th class="text-start">Dg Anest: Dr Op</th>
+                  <th class="text-start">Dg Anest: Dr An</th>
+                  <th class="text-start">Dg Anest: Prw</th>
+                  <th class="text-start">Tpa Anest: Dr Op</th>
+                  <th class="text-start">Tpa Anest: Prw</th>
+                  <th class="text-start">Supir</th>
+                  <th class="text-start">Rekam Medis</th>
+                  <th class="text-start">CSSD Laundry</th>
+                  <th class="text-center" width="80">Aktif</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
           </div>
         </div>
       </div>
