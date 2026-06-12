@@ -23,7 +23,9 @@ class TarifRemunerasiModel extends Model
               SELECT 
                 a.*,
                 b.tarif_nm,
-                b.tarif_tp
+                b.tarif_tp,
+                b.nominal,
+                b.unit_cost
               FROM mst_tarif_remunerasi a
               LEFT JOIN mst_tarif b ON a.tarif_id = b.tarif_id
               WHERE

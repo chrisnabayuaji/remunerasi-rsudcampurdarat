@@ -58,15 +58,17 @@
           }
         },
         {
-          data: "pelaku_st",
-          className: "align-middle text-start p-2"
+          data: "nominal",
+          className: "align-middle text-end p-2",
+          render: function(data) {
+            return data && parseFloat(data) > 0 ? formatRupiah(data) : '-';
+          }
         },
         {
-          data: "nilai",
+          data: "unit_cost",
           className: "align-middle text-end p-2",
-          render: function(data, type, row) {
-            if (row.tarif_tp === 'G') return '-';
-            return data ? data + ' %' : '0 %';
+          render: function(data) {
+            return data && parseFloat(data) > 0 ? formatRupiah(data) : '-';
           }
         },
         {

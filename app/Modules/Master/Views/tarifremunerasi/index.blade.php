@@ -139,8 +139,8 @@
                   --}}
                   <th class="text-start" width="120">ID Tarif</th>
                   <th class="text-start" width="300">Nama Tarif</th>
-                  <th class="text-start">Pelaku Status</th>
-                  <th class="text-start">Nilai (Total)</th>
+                  <th class="text-start">Nominal (SIMRS)</th>
+                  <th class="text-start">Unit Cost</th>
                   <th class="text-start">Jasa Sarana</th>
                   <th class="text-start">Jasa Layanan</th>
                   <th class="text-start">Cost Center</th>
