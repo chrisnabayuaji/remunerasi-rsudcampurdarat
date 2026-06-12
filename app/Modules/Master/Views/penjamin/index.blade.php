@@ -59,9 +59,11 @@
                     --}}
                     <th class="text-start">ID Penjamin</th>
                     <th class="text-start">Nama Penjamin</th>
+                    {{-- Column BPJS, Permanen, and RIS ID hidden as requested
                     <th class="text-center" width="80">BPJS</th>
                     <th class="text-center" width="80">Permanen</th>
                     <th class="text-start">RIS ID</th>
+                    --}}
                     <th class="text-center" width="80">Aktif</th>
                   </tr>
                 </thead>

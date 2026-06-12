@@ -53,6 +53,7 @@
           data: "penjamin_nm",
           className: "align-middle text-start p-2"
         },
+        /* bpjs_st, permanent_st, and ris_id columns commented out as requested
         {
           data: "bpjs_st",
           className: "align-middle text-center p-2",
@@ -85,6 +86,7 @@
           data: "ris_id",
           className: "align-middle text-start p-2"
         },
+        */
         {
           data: "active_st",
           className: "align-middle text-center p-2",
